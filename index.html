@@ -1,11 +1,135 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>ワン-ルベル</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ワン-ルベル | 山口市のトリミングサロン</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --main:#F5E1E6;
+      --base:#FFFBFB;
+      --text:#6B5E62;
+      --accent:#C2E0EB;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
+      background:var(--base);
+      color:var(--text);
+      line-height:1.8;
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:80px 24px;
+      text-align:center;
+    }
+
+    @media(max-width:768px){
+      .wrap{
+        padding:48px 20px;
+      }
+    }
+
+    .hero{
+      background:var(--main);
+      border-radius:24px;
+      padding:80px 24px;
+    }
+
+    @media(max-width:768px){
+      .hero{
+        padding:48px 20px;
+      }
+    }
+
+    h1{
+      font-size:30px;
+      font-weight:700;
+      margin:0 0 16px 0;
+    }
+
+    .subtitle{
+      font-size:16px;
+      margin-bottom:32px;
+    }
+
+    .message{
+      max-width:520px;
+      margin:0 auto 40px auto;
+      font-size:15px;
+    }
+
+    .cta{
+      display:inline-block;
+      background:var(--accent);
+      color:var(--text);
+      padding:14px 32px;
+      border-radius:9999px;
+      text-decoration:none;
+      font-weight:400;
+      transition:all .4s ease-out;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .cta:hover{
+      transform:translateY(-2px);
+    }
+
+    .note{
+      margin-top:32px;
+      font-size:14px;
+      opacity:.8;
+    }
+
+    footer{
+      margin-top:80px;
+      font-size:13px;
+      opacity:.6;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>ワン-ルベル</h1>
-  <p>山口市のトリミングサロン</p>
+
+  <div class="wrap">
+    <section class="hero">
+      <h1>ワン-ルベル</h1>
+      <div class="subtitle">山口市のトリミングサロン</div>
+
+      <div class="message">
+        やさしく、穏やかに。<br>
+        大切な家族が安心して過ごせる、<br>
+        第二のおうちのような空間を準備しています。
+      </div>
+
+      <a href="https://www.instagram.com/wanlebel"
+         target="_blank"
+         class="cta">
+        Instagramで最新情報を見る
+      </a>
+
+      <div class="note">
+        現在オープン準備中です。<br>
+        開始日や詳細はInstagramでお知らせいたします。
+      </div>
+    </section>
+
+    <footer>
+      © ワン-ルベル
+    </footer>
+  </div>
+
 </body>
 </html>
