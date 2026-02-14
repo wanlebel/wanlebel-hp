@@ -237,6 +237,51 @@
       background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23C2E0EB" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>') center/30% no-repeat;
       opacity: 0.2;
     }
+    
+    /* フェードインアニメーション */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .fade-in-delay-1 {
+      animation-delay: 0.1s;
+    }
+    
+    .fade-in-delay-2 {
+      animation-delay: 0.2s;
+    }
+    
+    .fade-in-delay-3 {
+      animation-delay: 0.3s;
+    }
+    
+    .fade-in-delay-4 {
+      animation-delay: 0.4s;
+    }
+    
+    /* スクロール時のフェードイン（初期状態） */
+    .scroll-fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .scroll-fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -290,17 +335,17 @@
     <!-- Trust Section (3 cards) -->
     <section class="section-spacing">
       <div class="container-custom">
-        <h2 class="text-center mb-12">安心してご利用いただける理由</h2>
+        <h2 class="text-center mb-12 scroll-fade-in">安心してご利用いただける理由</h2>
         <div class="grid md:grid-cols-3 gap-6">
-          <div class="card text-center">
+          <div class="card text-center scroll-fade-in">
             <h3 class="mb-4">犬専門サロン</h3>
             <p>犬だけに特化した環境で、ストレスなくトリミングを受けられます。</p>
           </div>
-          <div class="card text-center">
+          <div class="card text-center scroll-fade-in">
             <h3 class="mb-4">経験豊富なスタッフ</h3>
             <p>愛犬の気持ちに寄り添い、丁寧な施術を心がけています。</p>
           </div>
-          <div class="card text-center">
+          <div class="card text-center scroll-fade-in">
             <h3 class="mb-4">来店後のお支払い</h3>
             <p>お支払いは施術後、店頭にてお願いしております。事前決済はございません。</p>
           </div>
@@ -311,30 +356,30 @@
     <!-- Service Summary -->
     <section class="section-spacing" style="background-color: var(--color-main);">
       <div class="container-custom">
-        <h2 class="text-center mb-12">サービスについて</h2>
+        <h2 class="text-center mb-12 scroll-fade-in">サービスについて</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div class="card text-center">
+          <div class="card text-center scroll-fade-in">
             <div class="service-icon">✂️</div>
             <h3 class="mb-3">トリミング</h3>
             <p class="text-sm">全身のカット、シャンプー、ドライ、爪切り、耳掃除、肛門腺絞りを含む総合的なケアです。</p>
           </div>
-          <div class="card text-center">
+          <div class="card text-center scroll-fade-in">
             <div class="service-icon">🧴</div>
             <h3 class="mb-3">シャンプー</h3>
             <p class="text-sm">カット不要の場合のシャンプー、ドライ、爪切り、耳掃除、肛門腺絞りを含むケアです。</p>
           </div>
-          <div class="card text-center">
+          <div class="card text-center scroll-fade-in">
             <div class="service-icon">💅</div>
             <h3 class="mb-3">部分カット</h3>
             <p class="text-sm">顔周りや足先など、部分的にカットするサービスです。お気軽にご相談ください。</p>
           </div>
-          <div class="card text-center">
+          <div class="card text-center scroll-fade-in">
             <div class="service-icon">💆</div>
             <h3 class="mb-3">オプション</h3>
             <p class="text-sm">トリートメントやエステなど、愛犬の健康と美しさをサポートするオプションメニューもご用意しています。</p>
           </div>
         </div>
-        <div class="text-center">
+        <div class="text-center scroll-fade-in">
           <a href="/menu" 
              class="btn-primary" 
              data-cta="menu" 
@@ -347,11 +392,11 @@
     <section class="section-spacing">
       <div class="container-custom">
         <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div class="image-placeholder" style="height: 350px;">
+          <div class="image-placeholder scroll-fade-in" style="height: 350px;">
             <img src="/assets/img/concept.jpg" alt="サロン内観" style="display: none;">
             <p style="position: relative; z-index: 2; color: var(--color-text); opacity: 0.6;">サロン内観画像</p>
           </div>
-          <div>
+          <div class="scroll-fade-in">
             <h2 class="mb-6">アットホームで<br>落ち着いたおしゃれ空間</h2>
             <p class="mb-4">当サロンでは、白を基調とした落ち着いた空間で、わんちゃんが持つ魅力を最大限に引き出すためのトリミングを行っております。</p>
             <p class="mb-6">一匹一匹のわんちゃんの健康と美しさを山口市でサポートいたします。第二のおうちのような、やさしく包む空間で、愛犬との時間をお過ごしください。</p>
@@ -367,16 +412,16 @@
     <!-- Pricing Overview -->
     <section class="section-spacing">
       <div class="container-custom">
-        <h2 class="text-center mb-12">料金のご案内</h2>
+        <h2 class="text-center mb-12 scroll-fade-in">料金のご案内</h2>
         <div class="max-w-2xl mx-auto">
-          <div class="card mb-6">
+          <div class="card mb-6 scroll-fade-in">
             <h3 class="mb-4">トリミング</h3>
             <p class="mb-2">小型犬：6,000円〜</p>
             <p class="mb-2">中型犬：8,000円〜</p>
             <p class="mb-4">大型犬：10,000円〜</p>
             <p class="text-sm">※詳しい料金は<a href="/menu" class="underline hover:opacity-70 transition-opacity duration-300">メニューページ</a>をご確認ください。</p>
           </div>
-          <div class="text-center">
+          <div class="text-center scroll-fade-in">
             <a href="/menu" 
                class="btn-primary" 
                data-cta="menu" 
@@ -389,29 +434,29 @@
     <!-- Gallery Preview -->
     <section class="section-spacing" style="background-color: var(--color-main);">
       <div class="container-custom">
-        <h2 class="text-center mb-6">仕上がり例</h2>
-        <p class="text-center mb-8 max-w-2xl mx-auto">施術後のわんちゃんたちの写真を公開しています。様々な写真を通じて、サービスの品質と、わんちゃんへの想いをご実感いただけます。</p>
+        <h2 class="text-center mb-6 scroll-fade-in">仕上がり例</h2>
+        <p class="text-center mb-8 max-w-2xl mx-auto scroll-fade-in">施術後のわんちゃんたちの写真を公開しています。様々な写真を通じて、サービスの品質と、わんちゃんへの想いをご実感いただけます。</p>
         <div class="gallery-preview mb-8">
-          <div class="gallery-item-small">
+          <div class="gallery-item-small scroll-fade-in">
             <img src="/assets/img/gallery-1.jpg" alt="トリミング仕上がり例1" style="display: none;">
           </div>
-          <div class="gallery-item-small">
+          <div class="gallery-item-small scroll-fade-in">
             <img src="/assets/img/gallery-2.jpg" alt="トリミング仕上がり例2" style="display: none;">
           </div>
-          <div class="gallery-item-small">
+          <div class="gallery-item-small scroll-fade-in">
             <img src="/assets/img/gallery-3.jpg" alt="トリミング仕上がり例3" style="display: none;">
           </div>
-          <div class="gallery-item-small">
+          <div class="gallery-item-small scroll-fade-in">
             <img src="/assets/img/gallery-4.jpg" alt="トリミング仕上がり例4" style="display: none;">
           </div>
-          <div class="gallery-item-small">
+          <div class="gallery-item-small scroll-fade-in">
             <img src="/assets/img/gallery-5.jpg" alt="トリミング仕上がり例5" style="display: none;">
           </div>
-          <div class="gallery-item-small">
+          <div class="gallery-item-small scroll-fade-in">
             <img src="/assets/img/gallery-6.jpg" alt="トリミング仕上がり例6" style="display: none;">
           </div>
         </div>
-        <div class="text-center">
+        <div class="text-center scroll-fade-in">
           <a href="/gallery" 
              class="btn-primary mr-4" 
              data-cta="gallery" 
@@ -430,9 +475,9 @@
     <!-- Access -->
     <section class="section-spacing">
       <div class="container-custom">
-        <h2 class="text-center mb-12">アクセス</h2>
+        <h2 class="text-center mb-12 scroll-fade-in">アクセス</h2>
         <div class="max-w-2xl mx-auto">
-          <div class="card mb-6">
+          <div class="card mb-6 scroll-fade-in">
             <h3 class="mb-4">所在地</h3>
             <p class="mb-4">〒753-0000<br>山口県山口市○○町○-○-○</p>
             <div class="mb-6" style="height: 300px; background-color: var(--color-main); border-radius: 16px; display: flex; align-items: center; justify-content: center;">
@@ -450,22 +495,22 @@
     <!-- FAQ (3 items) -->
     <section class="section-spacing" style="background-color: var(--color-main);">
       <div class="container-custom">
-        <h2 class="text-center mb-12">よくある質問</h2>
+        <h2 class="text-center mb-12 scroll-fade-in">よくある質問</h2>
         <div class="max-w-3xl mx-auto space-y-6">
-          <div class="card">
+          <div class="card scroll-fade-in">
             <h3 class="mb-3">予約はどのようにすればよいですか？</h3>
             <p>オンライン予約システムからご予約いただけます。ご希望の日時を選択してお申し込みください。</p>
           </div>
-          <div class="card">
+          <div class="card scroll-fade-in">
             <h3 class="mb-3">支払い方法を教えてください</h3>
             <p>お支払いは施術後、店頭にてお願いしております。現金、各種クレジットカード、電子マネーに対応しています。</p>
           </div>
-          <div class="card">
+          <div class="card scroll-fade-in">
             <h3 class="mb-3">初めて利用する場合、何か準備は必要ですか？</h3>
             <p>特に準備は必要ありません。愛犬と一緒にご来店ください。ご不明な点がございましたら、LINEでお気軽にご相談ください。</p>
           </div>
         </div>
-        <div class="text-center mt-8">
+        <div class="text-center mt-8 scroll-fade-in">
           <a href="/faq" 
              class="btn-primary" 
              data-cta="faq" 
@@ -477,9 +522,9 @@
     <!-- Final CTA -->
     <section class="section-spacing">
       <div class="container-custom text-center">
-        <h2 class="mb-6">ご予約・お問い合わせ</h2>
-        <p class="mb-8">ご予約はオンラインから、ご相談はLINEからお気軽にどうぞ。</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <h2 class="mb-6 scroll-fade-in">ご予約・お問い合わせ</h2>
+        <p class="mb-8 scroll-fade-in">ご予約はオンラインから、ご相談はLINEからお気軽にどうぞ。</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center scroll-fade-in">
           <a href="https://stores.jp/wanlebel/reserve" 
              class="btn-primary text-lg px-8 py-4" 
              data-cta="reserve" 
@@ -557,5 +602,41 @@
   <!-- Scripts -->
   <script src="/assets/js/config.js"></script>
   <script src="/assets/js/gtm-events.js"></script>
+  <script>
+    // スクロール時のフェードインアニメーション
+    document.addEventListener('DOMContentLoaded', function() {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      // スクロールフェードイン対象の要素を取得
+      const fadeElements = document.querySelectorAll('.scroll-fade-in');
+      fadeElements.forEach(function(el) {
+        observer.observe(el);
+      });
+      
+      // Heroセクションの要素に初期フェードインを適用
+      const heroSection = document.querySelector('main > section:first-child');
+      if (heroSection) {
+        const heroContent = heroSection.querySelectorAll('h1, p, a, .image-placeholder');
+        heroContent.forEach(function(el, index) {
+          el.classList.add('fade-in');
+          if (index > 0) {
+            el.classList.add('fade-in-delay-' + Math.min(index, 4));
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
