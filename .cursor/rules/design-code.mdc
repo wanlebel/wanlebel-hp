@@ -1,0 +1,233 @@
+---
+name: wanlebel-design-system
+alwaysApply: true
+description: Design and implementation rules for Wan-Lebel official website
+---
+
+# Overview
+
+This rule enforces the Sweet Pastel Design Manual and structural principles for the Wan-Lebel website.  
+All UI, layout, typography, interaction, and content structure must strictly follow these constraints.
+
+The goal is to create a calm, trustworthy, low-stimulation experience that reduces anxiety while prioritizing reservation conversion.
+
+---
+
+# Brand Philosophy
+
+Core concept:
+"第二のおうちのような、やさしく包む空間"
+
+Design must:
+- Reduce anxiety
+- Avoid visual noise
+- Maintain soft atmosphere
+- Avoid aggressive marketing tone
+- Prioritize reservation clarity
+
+Cuteness is a result, not the objective.
+
+---
+
+# Business Model Constraints
+
+- Reservation is the highest priority action.
+- No prepayment system is used.
+- Payment is made at the salon after service.
+- Online reservation is the main booking method.
+- LINE is for consultation only, not primary booking.
+
+Reservation CTA must always be visually dominant.
+
+---
+
+# Color System (Strict)
+
+Main: #F5E1E6  
+Base: #FFFBFB  
+Text: #6B5E62  
+Accent: #C2E0EB  
+
+Prohibited:
+- #000000
+- Pure black text
+- Vivid colors
+- Red emphasis
+- Multi-color gradients
+
+Color balance:
+Base ~45%
+Main ~35%
+Text ~15%
+Accent ~5-10%
+
+Only ONE primary accent element per section.
+
+---
+
+# Typography
+
+Primary: "Zen Maru Gothic"
+Fallback: "Noto Sans JP", sans-serif
+
+Headings: font-weight 700
+Body: font-weight 400
+
+Line-height: 1.8
+
+Do not overuse bold text.
+Do not use heavy font contrasts.
+
+---
+
+# Layout System
+
+Max width: 1100px
+Centered layout
+
+Section spacing:
+- Desktop: minimum 80px vertical
+- Mobile: minimum 48px vertical
+
+Card padding: minimum 24px
+
+One message per section.
+Avoid dense content.
+Avoid large text blocks.
+
+Whitespace equals psychological safety.
+
+---
+
+# UI Components
+
+Primary CTA Button:
+- Background: #C2E0EB
+- Text: #6B5E62
+- Border-radius: 9999px
+- Subtle shadow
+- Hover: slight elevation only
+
+Cards:
+- Background: white
+- Border-radius: 16px
+- Soft shadow
+- No heavy borders
+
+Icons:
+- Line-based preferred
+- Minimal fill
+- Rounded style
+
+---
+
+# Navigation Rules
+
+Desktop:
+- Fixed header allowed
+- Must include link to /menu, /access, /faq
+- Reservation button visible
+
+Mobile:
+- Fixed bottom navigation required
+- Exactly 3 items only:
+  1. Reservation (primary, accent)
+  2. Menu
+  3. LINE consultation
+
+Do NOT add more than 3 items.
+Reservation must be visually dominant.
+
+---
+
+# Structural Rules
+
+Homepage must include:
+
+1. Hero
+2. Trust section (3 cards)
+3. Service summary
+4. Pricing overview (linked to /menu)
+5. Instagram reference
+6. Access (small embedded map)
+7. FAQ (3 items)
+8. Final CTA
+
+Homepage should feel complete,
+but deeper information must link to:
+
+- /menu
+- /access
+- /faq
+- /policy
+
+SEO pages must exist separately.
+
+---
+
+# SEO and Content Tone
+
+Tone:
+- Polite Japanese
+- Calm
+- No hype
+- No pressure language
+
+Forbidden wording:
+- 最安値
+- 圧倒的
+- 今すぐ
+- 絶対
+
+Include naturally:
+- 山口市
+- 犬専門
+- トリミング
+- サロン
+
+Do not keyword stuff.
+Write for humans first.
+
+---
+
+# Payment Information Rule
+
+Clearly state:
+"お支払いは施術後、店頭にてお願いしております。"
+
+Do not mention prepayment.
+
+---
+
+# Animation Rules
+
+- Fade only
+- Duration: 0.3s–0.6s
+- Ease-out
+- No bounce
+- No aggressive motion
+- No parallax
+
+Motion must feel soft and minimal.
+
+---
+
+# Implementation Constraints
+
+- Static HTML
+- TailwindCSS allowed
+- Minimal JavaScript
+- Fully responsive
+- Avoid heavy libraries
+- Clean semantic structure (h1-h3 hierarchy correct)
+- Maintain accessibility basics (alt text, proper contrast within palette)
+
+---
+
+# Validation Rule
+
+If unsure, ask:
+
+"Does this design reduce anxiety and support reservation?"
+
+If no, redesign.
