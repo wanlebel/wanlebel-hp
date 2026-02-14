@@ -168,6 +168,75 @@
         font-size: 1.25rem;
       }
     }
+    
+    .image-placeholder {
+      background: linear-gradient(135deg, var(--color-main) 0%, var(--color-accent) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .image-placeholder::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23C2E0EB" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>') center/40% no-repeat;
+      opacity: 0.3;
+    }
+    
+    .image-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .service-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      background-color: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+    
+    .gallery-preview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    
+    @media (max-width: 768px) {
+      .gallery-preview {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+    }
+    
+    .gallery-item-small {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--color-main) 0%, var(--color-accent) 100%);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .gallery-item-small::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23C2E0EB" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>') center/30% no-repeat;
+      opacity: 0.2;
+    }
   </style>
 </head>
 <body>
@@ -200,13 +269,21 @@
   <main style="margin-top: 80px;">
     <!-- Hero Section -->
     <section class="section-spacing" style="background: linear-gradient(to bottom, var(--color-main), var(--color-base));">
-      <div class="container-custom text-center">
-        <h1 class="mb-6">第二のおうちのような、<br>やさしく包む空間</h1>
-        <p class="text-lg mb-8 max-w-2xl mx-auto">山口市の犬専門トリミングサロン「ワン-ルベル」では、愛犬が安心して過ごせる環境を大切にしています。</p>
-        <a href="https://stores.jp/wanlebel/reserve" 
-           class="btn-primary text-lg px-8 py-4" 
-           data-cta="reserve" 
-           data-gtm-label="reserve">予約する</a>
+      <div class="container-custom">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="text-center md:text-left">
+            <h1 class="mb-6">第二のおうちのような、<br>やさしく包む空間</h1>
+            <p class="text-lg mb-8">山口市の犬専門トリミングサロン「ワン-ルベル」では、愛犬が安心して過ごせる環境を大切にしています。</p>
+            <a href="https://stores.jp/wanlebel/reserve" 
+               class="btn-primary text-lg px-8 py-4" 
+               data-cta="reserve" 
+               data-gtm-label="reserve">予約する</a>
+          </div>
+          <div class="image-placeholder" style="height: 400px; border-radius: 24px;">
+            <img src="/assets/img/hero.jpg" alt="ワン-ルベルサロン外観" style="display: none;">
+            <p style="position: relative; z-index: 2; color: var(--color-text); opacity: 0.6;">サロン外観画像</p>
+          </div>
+        </div>
       </div>
     </section>
     
@@ -234,13 +311,55 @@
     <!-- Service Summary -->
     <section class="section-spacing" style="background-color: var(--color-main);">
       <div class="container-custom">
-        <div class="max-w-3xl mx-auto text-center">
-          <h2 class="mb-6">サービスについて</h2>
-          <p class="mb-8">ワン-ルベルでは、トリミングをはじめ、愛犬の健康と美容をサポートする各種サービスをご用意しています。詳しいメニューと料金は<a href="/menu" class="underline hover:opacity-70 transition-opacity duration-300">メニューページ</a>をご覧ください。</p>
+        <h2 class="text-center mb-12">サービスについて</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="card text-center">
+            <div class="service-icon">✂️</div>
+            <h3 class="mb-3">トリミング</h3>
+            <p class="text-sm">全身のカット、シャンプー、ドライ、爪切り、耳掃除、肛門腺絞りを含む総合的なケアです。</p>
+          </div>
+          <div class="card text-center">
+            <div class="service-icon">🧴</div>
+            <h3 class="mb-3">シャンプー</h3>
+            <p class="text-sm">カット不要の場合のシャンプー、ドライ、爪切り、耳掃除、肛門腺絞りを含むケアです。</p>
+          </div>
+          <div class="card text-center">
+            <div class="service-icon">💅</div>
+            <h3 class="mb-3">部分カット</h3>
+            <p class="text-sm">顔周りや足先など、部分的にカットするサービスです。お気軽にご相談ください。</p>
+          </div>
+          <div class="card text-center">
+            <div class="service-icon">💆</div>
+            <h3 class="mb-3">オプション</h3>
+            <p class="text-sm">トリートメントやエステなど、愛犬の健康と美しさをサポートするオプションメニューもご用意しています。</p>
+          </div>
+        </div>
+        <div class="text-center">
           <a href="/menu" 
              class="btn-primary" 
              data-cta="menu" 
-             data-gtm-label="menu">メニューを見る</a>
+             data-gtm-label="menu">詳しいメニューを見る</a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Concept Section -->
+    <section class="section-spacing">
+      <div class="container-custom">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="image-placeholder" style="height: 350px;">
+            <img src="/assets/img/concept.jpg" alt="サロン内観" style="display: none;">
+            <p style="position: relative; z-index: 2; color: var(--color-text); opacity: 0.6;">サロン内観画像</p>
+          </div>
+          <div>
+            <h2 class="mb-6">アットホームで<br>落ち着いたおしゃれ空間</h2>
+            <p class="mb-4">当サロンでは、白を基調とした落ち着いた空間で、わんちゃんが持つ魅力を最大限に引き出すためのトリミングを行っております。</p>
+            <p class="mb-6">一匹一匹のわんちゃんの健康と美しさを山口市でサポートいたします。第二のおうちのような、やさしく包む空間で、愛犬との時間をお過ごしください。</p>
+            <a href="/gallery" 
+               class="btn-primary" 
+               data-cta="gallery" 
+               data-gtm-label="gallery">仕上がり例を見る</a>
+          </div>
         </div>
       </div>
     </section>
@@ -267,17 +386,44 @@
       </div>
     </section>
     
-    <!-- Instagram Reference -->
+    <!-- Gallery Preview -->
     <section class="section-spacing" style="background-color: var(--color-main);">
-      <div class="container-custom text-center">
-        <h2 class="mb-6">仕上がり例</h2>
-        <p class="mb-8">Instagramで日々の仕上がり例をご紹介しています。</p>
-        <a href="https://www.instagram.com/wanlebel" 
-           target="_blank" 
-           rel="noopener noreferrer"
-           class="btn-primary" 
-           data-cta="instagram" 
-           data-gtm-label="instagram">Instagramを見る</a>
+      <div class="container-custom">
+        <h2 class="text-center mb-6">仕上がり例</h2>
+        <p class="text-center mb-8 max-w-2xl mx-auto">施術後のわんちゃんたちの写真を公開しています。様々な写真を通じて、サービスの品質と、わんちゃんへの想いをご実感いただけます。</p>
+        <div class="gallery-preview mb-8">
+          <div class="gallery-item-small">
+            <img src="/assets/img/gallery-1.jpg" alt="トリミング仕上がり例1" style="display: none;">
+          </div>
+          <div class="gallery-item-small">
+            <img src="/assets/img/gallery-2.jpg" alt="トリミング仕上がり例2" style="display: none;">
+          </div>
+          <div class="gallery-item-small">
+            <img src="/assets/img/gallery-3.jpg" alt="トリミング仕上がり例3" style="display: none;">
+          </div>
+          <div class="gallery-item-small">
+            <img src="/assets/img/gallery-4.jpg" alt="トリミング仕上がり例4" style="display: none;">
+          </div>
+          <div class="gallery-item-small">
+            <img src="/assets/img/gallery-5.jpg" alt="トリミング仕上がり例5" style="display: none;">
+          </div>
+          <div class="gallery-item-small">
+            <img src="/assets/img/gallery-6.jpg" alt="トリミング仕上がり例6" style="display: none;">
+          </div>
+        </div>
+        <div class="text-center">
+          <a href="/gallery" 
+             class="btn-primary mr-4" 
+             data-cta="gallery" 
+             data-gtm-label="gallery">もっと見る</a>
+          <a href="https://www.instagram.com/wanlebel" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="btn-primary" 
+             style="background-color: var(--color-base);"
+             data-cta="instagram" 
+             data-gtm-label="instagram">Instagramを見る</a>
+        </div>
       </div>
     </section>
     
