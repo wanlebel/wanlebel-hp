@@ -101,6 +101,114 @@
       box-shadow: 0 1px 4px rgba(107, 94, 98, 0.05);
     }
     
+    /* ハンバーガーメニュー */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 60;
+    }
+    
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+    }
+    
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background-color: var(--color-text);
+      border-radius: 2px;
+      transition: all 0.3s ease-out;
+    }
+    
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+    
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 280px;
+      height: 100vh;
+      background: white;
+      box-shadow: 2px 0 8px rgba(107, 94, 98, 0.1);
+      z-index: 55;
+      transition: left 0.3s ease-out;
+      overflow-y: auto;
+      padding-top: 80px;
+    }
+    
+    .mobile-menu.active {
+      left: 0;
+    }
+    
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(107, 94, 98, 0.3);
+      z-index: 54;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+    }
+    
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu-item {
+      display: block;
+      padding: 16px 24px;
+      color: var(--color-text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-main);
+      transition: all 0.3s ease-out;
+    }
+    
+    .mobile-menu-item:hover {
+      background-color: var(--color-main);
+    }
+    
+    .mobile-menu-item.primary {
+      background-color: var(--color-accent);
+      font-weight: 700;
+      margin: 16px;
+      border-radius: 9999px;
+      text-align: center;
+      border: none;
+    }
+    
+    .header-logo {
+      flex: 1;
+      text-align: center;
+    }
+    
+    @media (min-width: 769px) {
+      .header-logo {
+        flex: 0;
+        text-align: left;
+      }
+    }
+    
     .mobile-nav {
       position: fixed;
       bottom: 0;
@@ -296,10 +404,16 @@
   <!-- Header -->
   <header class="header-fixed">
     <div class="container-custom">
-      <nav class="flex items-center justify-between py-4">
-        <a href="/" class="text-xl font-bold" style="color: var(--color-text);">ワン-ルベル</a>
-        <div class="hidden md:flex items-center gap-6">
+      <nav class="flex items-center py-4">
+        <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a href="/" class="header-logo text-xl font-bold" style="color: var(--color-text);">ワン-ルベル</a>
+        <div class="hidden md:flex items-center gap-6 ml-auto">
           <a href="/menu" class="hover:opacity-70 transition-opacity duration-300" style="color: var(--color-text);">メニュー</a>
+          <a href="/gallery" class="hover:opacity-70 transition-opacity duration-300" style="color: var(--color-text);">仕上がり例</a>
           <a href="/access" class="hover:opacity-70 transition-opacity duration-300" style="color: var(--color-text);">アクセス</a>
           <a href="/faq" class="hover:opacity-70 transition-opacity duration-300" style="color: var(--color-text);">よくある質問</a>
           <a href="https://stores.jp/wanlebel/reserve" 
@@ -310,6 +424,32 @@
       </nav>
     </div>
   </header>
+  
+  <!-- モバイルメニューオーバーレイ -->
+  <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  
+  <!-- モバイルメニュー -->
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="/" class="mobile-menu-item">トップ</a>
+    <a href="/menu" class="mobile-menu-item" data-cta="menu" data-gtm-label="menu">メニュー</a>
+    <a href="/gallery" class="mobile-menu-item" data-cta="gallery" data-gtm-label="gallery">仕上がり例</a>
+    <a href="/access" class="mobile-menu-item" data-cta="access" data-gtm-label="access">アクセス</a>
+    <a href="/faq" class="mobile-menu-item" data-cta="faq" data-gtm-label="faq">よくある質問</a>
+    <a href="https://stores.jp/wanlebel/reserve" 
+       class="mobile-menu-item primary" 
+       data-cta="reserve" 
+       data-gtm-label="reserve">予約する</a>
+    <a href="https://line.me/ti/p/@wanlebel" 
+       class="mobile-menu-item" 
+       data-cta="line" 
+       data-gtm-label="line">LINEで相談</a>
+    <a href="https://www.instagram.com/wanlebel" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="mobile-menu-item" 
+       data-cta="instagram" 
+       data-gtm-label="instagram">Instagram</a>
+  </nav>
   
   <main style="margin-top: 80px;">
     <!-- Hero Section -->
@@ -603,6 +743,31 @@
   <script src="/assets/js/config.js"></script>
   <script src="/assets/js/gtm-events.js"></script>
   <script>
+    // ハンバーガーメニューの開閉
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuOverlay = document.getElementById('menuOverlay');
+      
+      function toggleMenu() {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+      }
+      
+      hamburger.addEventListener('click', toggleMenu);
+      menuOverlay.addEventListener('click', toggleMenu);
+      
+      // メニュー内のリンクをクリックしたらメニューを閉じる
+      const menuItems = mobileMenu.querySelectorAll('.mobile-menu-item');
+      menuItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+          toggleMenu();
+        });
+      });
+    });
+    
     // スクロール時のフェードインアニメーション
     document.addEventListener('DOMContentLoaded', function() {
       const observerOptions = {
