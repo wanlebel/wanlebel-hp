@@ -112,7 +112,7 @@
       border: none;
       cursor: pointer;
       padding: 8px;
-      z-index: 60;
+      z-index: 70;
       position: relative;
       width: 40px;
       height: 40px;
@@ -174,7 +174,7 @@
       height: 100vh;
       background: white;
       box-shadow: 2px 0 8px rgba(107, 94, 98, 0.1);
-      z-index: 55;
+      z-index: 60;
       transition: left 0.3s ease-out;
       overflow-y: auto;
       padding-top: 80px;
@@ -191,7 +191,7 @@
       right: 0;
       bottom: 0;
       background: rgba(107, 94, 98, 0.3);
-      z-index: 54;
+      z-index: 55;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
@@ -634,17 +634,30 @@
         <h2 class="text-center mb-12 scroll-fade-in">料金のご案内</h2>
         <div class="max-w-2xl mx-auto">
           <div class="card mb-6 scroll-fade-in">
-            <h3 class="mb-4">トリミング</h3>
-            <p class="mb-2">小型犬：6,000円〜</p>
-            <p class="mb-2">中型犬：8,000円〜</p>
-            <p class="mb-4">大型犬：10,000円〜</p>
-            <p class="text-sm">※詳しい料金は<a href="/menu" class="underline hover:opacity-70 transition-opacity duration-300">メニューページ</a>をご確認ください。</p>
+            <h3 class="mb-6">小型犬（〜7kgまで）</h3>
+            <ul class="space-y-4 text-sm">
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">チワワL</span><br>シャンプー 4,000円　シャンプー&amp;カット 6,000円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">チワワスムース</span><br>シャンプー 3,500円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ダックス</span><br>カット 4,500円　シャンプー&amp;カット 6,500円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">パグ</span><br>シャンプー 4,500円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ポメラニアン</span><br>シャンプー 5,500円　シャンプー&amp;カット 7,000円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">マルチーズ</span><br>シャンプー 5,500円　シャンプー&amp;カット 7,000円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">シーズー</span><br>シャンプー 5,500円　シャンプー&amp;カット 7,000円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ヨーキー</span><br>シャンプー 5,500円　シャンプー&amp;カット 7,000円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">トイプードル（〜4kgまで）</span><br>シャンプー 5,500円　シャンプー&amp;カット 7,000円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ペキニーズ</span><br>シャンプー 5,000円　シャンプー&amp;カット 6,500円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ミニチュアピンシャー</span><br>シャンプー 3,500円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">シュナウザー</span><br>シャンプー 6,000円　シャンプー&amp;カット 8,000円</li>
+              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">パピオン</span><br>シャンプー 4,500円　シャンプー&amp;カット 6,500円</li>
+              <li class="pb-3"><span class="font-bold">ビジョンフリーゼ</span><br>シャンプー 6,000円　シャンプー&amp;カット 8,000円</li>
+            </ul>
+            <p class="mt-6 pt-4 border-t text-sm" style="border-color: var(--color-main);">中型犬・大型犬の料金は<a href="/menu" class="underline hover:opacity-70 transition-opacity duration-300">メニューページ</a>をご確認ください。</p>
           </div>
           <div class="text-center scroll-fade-in">
             <a href="/menu" 
                class="btn-primary" 
                data-cta="menu" 
-               data-gtm-label="menu">詳しいメニューを見る</a>
+               data-gtm-label="menu">詳しいメニューを見る（中型犬〜）</a>
           </div>
         </div>
       </div>
