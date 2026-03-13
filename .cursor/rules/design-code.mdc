@@ -43,10 +43,12 @@ Reservation CTA must always be visually dominant.
 
 # Color System (Strict)
 
-Main: #F5E1E6  
-Base: #FFFBFB  
-Text: #6B5E62  
-Accent: #C2E0EB  
+店舗内装に合わせた黄色・茶色ベース、アクセント水色。
+
+Main: #F5F0E1  
+Base: #FFFCF7  
+Text: #5C4A3D  
+Accent: #B5DAE8  
 
 Prohibited:
 - #000000
@@ -102,8 +104,8 @@ Whitespace equals psychological safety.
 # UI Components
 
 Primary CTA Button:
-- Background: #C2E0EB
-- Text: #6B5E62
+- Background: #B5DAE8
+- Text: #5C4A3D
 - Border-radius: 9999px
 - Subtle shadow
 - Hover: slight elevation only
