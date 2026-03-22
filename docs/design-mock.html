@@ -44,10 +44,6 @@
     ===================== */
 
     /* 犬が歩く */
-    @keyframes dogWalk {
-      0%   { left: -80px; }
-      100% { left: calc(100% + 80px); }
-    }
     @keyframes dogBody {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       25%       { transform: translateY(-4px) rotate(1deg); }
@@ -264,28 +260,24 @@
     }
 
     /* =====================
-       犬が歩くアニメーション
+       犬がヒーロー底辺を歩く
     ===================== */
-    .dog-walk-section {
-      height: 80px;
-      position: relative;
-      overflow: hidden;
-      margin: 0;
+    .hero .wrap { position: relative; }
+    .hero-dog-walk {
+      position: absolute;
+      bottom: -30px;
+      left: 0; right: 0;
+      height: 72px;
+      pointer-events: none;
+      z-index: 10;
+      overflow: visible;
     }
     .walking-dog {
       position: absolute;
-      bottom: 8px;
-      animation: dogWalk 8s linear infinite;
-      display: flex; flex-direction: column;
-      align-items: center;
+      bottom: 0;
+      display: flex; align-items: flex-end;
     }
     .dog-svg { animation: dogBody 0.5s ease-in-out infinite; }
-
-    /* SVGで犬を描く */
-    .paw-trail {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 80px; pointer-events: none;
-    }
 
     /* =====================
        コンセプトセクション
@@ -652,13 +644,9 @@
       <p>山口市のトリミングサロン & ペットホテル</p>
     </div>
   </div>
-  </div>
-</section>
-
-<!-- 犬が歩くアニメーション -->
-<div class="dog-walk-section">
-  <div class="walking-dog">
-    <svg class="dog-svg" width="72" height="48" viewBox="0 0 72 48">
+  <div class="hero-dog-walk">
+    <div class="walking-dog" id="walkingDog">
+      <svg class="dog-svg" width="72" height="48" viewBox="0 0 72 48">
       <!-- 体 -->
       <ellipse cx="36" cy="28" rx="20" ry="12" fill="#F5C842" stroke="#C49A22" stroke-width="1.5"/>
       <!-- 頭 -->
@@ -691,8 +679,10 @@
         <animateTransform attributeName="transform" type="rotate" values="20 19 36;-20 19 36;20 19 36" dur="0.5s" repeatCount="indefinite"/>
       </rect>
     </svg>
+    </div>
   </div>
-</div>
+  </div>
+</section>
 
 <!-- コンセプト -->
 <section class="concept">
@@ -1029,6 +1019,31 @@
   // 最初は少し待って開始、その後10秒間隔で繰り返し
   setTimeout(spawnPawTrail, 1500);
   setInterval(spawnPawTrail, 10000);
+
+  // 犬がヒーロー画像の底辺を左右に歩く
+  (function() {
+    const dog = document.getElementById('walkingDog');
+    const heroImg = document.querySelector('.hero-img');
+    let x = -80;
+    let dir = 1; // 1=右向き, -1=左向き
+    const speed = 1.5;
+
+    function tick() {
+      const maxX = heroImg.offsetWidth;
+      x += dir * speed;
+      // scaleX(-1)で左向きに反転、transform-originを左端に固定して位置ずれ防止
+      dog.style.transformOrigin = '0 100%';
+      dog.style.transform = dir === 1
+        ? `translateX(${x}px)`
+        : `translateX(${x + 72}px) scaleX(-1)`;
+
+      if (dir === 1 && x >= maxX + 80) { dir = -1; }
+      else if (dir === -1 && x <= -80) { dir = 1; }
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
 </script>
 
 </body>
