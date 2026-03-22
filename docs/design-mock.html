@@ -646,39 +646,40 @@
   </div>
   <div class="hero-dog-walk">
     <div class="walking-dog" id="walkingDog">
-      <svg class="dog-svg" width="72" height="48" viewBox="0 0 72 48">
-      <!-- 体 -->
-      <ellipse cx="36" cy="28" rx="20" ry="12" fill="#F5C842" stroke="#C49A22" stroke-width="1.5"/>
-      <!-- 頭 -->
-      <circle cx="56" cy="22" r="11" fill="#F5C842" stroke="#C49A22" stroke-width="1.5"/>
-      <!-- 耳 -->
-      <ellipse cx="61" cy="14" rx="5" ry="7" fill="#C49A22" transform="rotate(15 61 14)"/>
-      <!-- 目 -->
-      <circle cx="60" cy="21" r="2" fill="#4A3728"/>
-      <circle cx="61" cy="20.5" r="0.7" fill="white"/>
-      <!-- 鼻 -->
-      <ellipse cx="66" cy="24" rx="2.5" ry="1.5" fill="#4A3728"/>
-      <!-- しっぽ -->
-      <path d="M16 26 Q8 18 12 12" stroke="#C49A22" stroke-width="3" stroke-linecap="round" fill="none">
-        <animateTransform attributeName="transform" type="rotate" values="0 16 26;15 16 26;-10 16 26;0 16 26" dur="0.6s" repeatCount="indefinite"/>
-      </path>
-      <!-- 前脚右 -->
-      <rect x="48" y="36" width="5" height="14" rx="2.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5" transform-origin="48 36">
-        <animateTransform attributeName="transform" type="rotate" values="20 48 36;-20 48 36;20 48 36" dur="0.5s" repeatCount="indefinite"/>
-      </rect>
-      <!-- 前脚左 -->
-      <rect x="41" y="36" width="5" height="14" rx="2.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5" transform-origin="41 36">
-        <animateTransform attributeName="transform" type="rotate" values="-20 41 36;20 41 36;-20 41 36" dur="0.5s" repeatCount="indefinite"/>
-      </rect>
-      <!-- 後脚右 -->
-      <rect x="26" y="36" width="5" height="14" rx="2.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5" transform-origin="26 36">
-        <animateTransform attributeName="transform" type="rotate" values="-20 26 36;20 26 36;-20 26 36" dur="0.5s" repeatCount="indefinite"/>
-      </rect>
-      <!-- 後脚左 -->
-      <rect x="19" y="36" width="5" height="14" rx="2.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5" transform-origin="19 36">
-        <animateTransform attributeName="transform" type="rotate" values="20 19 36;-20 19 36;20 19 36" dur="0.5s" repeatCount="indefinite"/>
-      </rect>
-    </svg>
+      <svg class="dog-svg" width="82" height="58" viewBox="0 0 82 58">
+        <!-- しっぽ（体の後ろ側なので最初に描く） -->
+        <path d="M16 28 Q7 18 12 10" stroke="#C49A22" stroke-width="3" stroke-linecap="round" fill="none">
+          <animateTransform attributeName="transform" type="rotate" values="0 16 28;13 16 28;-8 16 28;0 16 28" dur="0.6s" repeatCount="indefinite"/>
+        </path>
+        <!-- 脚（体の下に描くことで付け根が体に隠れる） -->
+        <!-- 後脚A -->
+        <rect x="19" y="28" width="7" height="24" rx="3.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5">
+          <animateTransform attributeName="transform" type="rotate" values="-16 22 28;16 22 28;-16 22 28" dur="0.5s" repeatCount="indefinite"/>
+        </rect>
+        <!-- 後脚B -->
+        <rect x="27" y="28" width="7" height="24" rx="3.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5">
+          <animateTransform attributeName="transform" type="rotate" values="16 30 28;-16 30 28;16 30 28" dur="0.5s" repeatCount="indefinite"/>
+        </rect>
+        <!-- 前脚A -->
+        <rect x="46" y="28" width="7" height="24" rx="3.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5">
+          <animateTransform attributeName="transform" type="rotate" values="16 49 28;-16 49 28;16 49 28" dur="0.5s" repeatCount="indefinite"/>
+        </rect>
+        <!-- 前脚B -->
+        <rect x="54" y="28" width="7" height="24" rx="3.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5">
+          <animateTransform attributeName="transform" type="rotate" values="-16 57 28;16 57 28;-16 57 28" dur="0.5s" repeatCount="indefinite"/>
+        </rect>
+        <!-- 体（脚の付け根を覆う・後から描くので前面に） -->
+        <ellipse cx="38" cy="27" rx="22" ry="13" fill="#F5C842" stroke="#C49A22" stroke-width="1.5"/>
+        <!-- 頭 -->
+        <circle cx="60" cy="21" r="12" fill="#F5C842" stroke="#C49A22" stroke-width="1.5"/>
+        <!-- 耳 -->
+        <ellipse cx="65" cy="11" rx="5" ry="8" fill="#C49A22" transform="rotate(15 65 11)"/>
+        <!-- 目 -->
+        <circle cx="64" cy="19" r="2.5" fill="#3D2B1F"/>
+        <circle cx="65" cy="18" r="0.8" fill="white"/>
+        <!-- 鼻 -->
+        <ellipse cx="71" cy="23" rx="2.5" ry="1.5" fill="#3D2B1F"/>
+      </svg>
     </div>
   </div>
   </div>
