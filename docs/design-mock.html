@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>パターンB モック（Aカラー × Paw Parkレイアウト）</title>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* 60% ベース：温かみのあるクリーム */
+      --cream: #FAF6ED;
+      --cream-deep: #F2EBD9;
+      /* 30% サブ：深みのあるゴールドイエロー */
+      --mustard: #E8B84B;
+      --mustard-light: rgba(232,184,75,0.16);
+      /* 10% アクセント：落ち着いたティール */
+      --teal: #0097A7;
+      --teal-dark: #006978;
+      --teal-light: #E0F4F6;
+      /* テキスト */
+      --text: #3D2B1F;
+      --text-light: #8C7560;
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-size: 16px;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+    @media (max-width: 768px) {
+      .wrap { padding: 0 16px; }
+    }
+
+    /* =====================
+       アニメーション定義
+    ===================== */
+
+    /* 犬が歩く */
+    @keyframes dogWalk {
+      0%   { left: -80px; }
+      100% { left: calc(100% + 80px); }
+    }
+    @keyframes dogBody {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25%       { transform: translateY(-4px) rotate(1deg); }
+      75%       { transform: translateY(-2px) rotate(-1deg); }
+    }
+    @keyframes leg {
+      0%, 100% { transform: rotate(20deg); }
+      50%       { transform: rotate(-20deg); }
+    }
+    @keyframes legBack {
+      0%, 100% { transform: rotate(-20deg); }
+      50%       { transform: rotate(20deg); }
+    }
+    @keyframes tailWag {
+      0%, 100% { transform: rotate(20deg); }
+      50%       { transform: rotate(-20deg); }
+    }
+
+    /* エサが溜まる */
+    @keyframes fillBowl {
+      0%   { height: 0; opacity: 0; }
+      20%  { opacity: 1; }
+      100% { height: 28px; opacity: 1; }
+    }
+    @keyframes kibbleFall {
+      0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+      20%  { opacity: 1; }
+      100% { transform: translateY(0) rotate(180deg); opacity: 1; }
+    }
+    @keyframes bowlBounce {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.04); }
+    }
+
+    /* 肉球がふわっと出る */
+    @keyframes pawAppear {
+      0%   { transform: scale(0) rotate(-30deg); opacity: 0; }
+      60%  { transform: scale(1.2) rotate(5deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    /* フワフワ浮く */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    /* blobぐにゃり */
+    @keyframes blobMorph {
+      0%   { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+      33%  { border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%; }
+      66%  { border-radius: 70% 30% 50% 50% / 40% 60% 40% 60%; }
+      100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+    }
+
+    /* フェードイン */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =====================
+       ヘッダー
+    ===================== */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,253,231,0.92);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 rgba(0,188,212,0.12);
+    }
+    .header-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 14px 48px;
+      display: flex; align-items: center; gap: 32px;
+    }
+    .logo {
+      font-size: 20px; font-weight: 600;
+      color: var(--teal-dark);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .logo-paw { font-size: 22px; animation: float 3s ease-in-out infinite; display: inline-block; }
+    .nav { display: flex; gap: 24px; margin-left: auto; align-items: center; }
+    .nav a { font-size: 15px; color: var(--text); text-decoration: none; }
+
+    /* ハンバーガー */
+    .hamburger {
+      display: none; margin-left: auto;
+      background: none; border: none;
+      cursor: pointer; padding: 8px;
+      flex-direction: column; gap: 5px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--teal-dark); border-radius: 2px;
+      transition: all 0.35s ease;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ドロワー */
+    .drawer {
+      position: fixed; top: 0; left: -100%;
+      width: 75%; max-width: 300px; height: 100vh;
+      background: white;
+      box-shadow: 4px 0 24px rgba(61,43,31,0.12);
+      z-index: 150; padding: 80px 32px 32px;
+      display: flex; flex-direction: column; gap: 4px;
+      transition: left 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .drawer.open { left: 0; }
+    .drawer a {
+      font-size: 17px; color: var(--text);
+      text-decoration: none; padding: 14px 0;
+      border-bottom: 1px solid var(--cream-deep);
+    }
+    .drawer .btn-reserve {
+      margin-top: 20px; text-align: center;
+      border-radius: 9999px; padding: 14px;
+    }
+    .drawer-overlay {
+      position: fixed; inset: 0;
+      background: rgba(61,43,31,0.3);
+      z-index: 140; opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+    @media (max-width: 768px) {
+      .header-inner { padding: 14px 20px; }
+      .nav { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 24px 16px 0; }
+      .hero-img { height: 220px; border-radius: 20px; }
+      .hero-text { left: 24px; bottom: 28px; }
+      .hero-text h1 { font-size: 28px; }
+      .concept { flex-direction: column; padding: 48px 20px; gap: 24px; }
+      .concept::before { width: 140px; height: 140px; left: -30px; }
+      .concept-img-wrap { flex: unset; width: 100%; display: flex; justify-content: center; }
+      .concept-circle { width: 200px; height: 200px; font-size: 64px; }
+      .services { padding: 0 0 40px; }
+      .service-card { flex-direction: column !important; padding: 24px 20px; }
+      .service-card.reverse { flex-direction: column !important; }
+      .faq { padding: 40px 20px; }
+      .photo-grid { grid-template-columns: 1fr 1fr; padding: 0 16px 40px; }
+      .footer { padding: 40px 20px 24px; }
+      .footer-top { flex-direction: column; gap: 28px; }
+      .footer-nav { flex-direction: column; gap: 20px; margin-left: 0; }
+      .bowl-animation-section { gap: 28px; }
+    }
+    .btn-reserve {
+      background: var(--teal); color: white;
+      border: none; border-radius: 9999px;
+      padding: 10px 28px; font-size: 15px;
+      font-family: inherit; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,188,212,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-reserve:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,188,212,0.45);
+    }
+
+    /* =====================
+       ヒーロー
+    ===================== */
+    .hero {
+      padding: 48px 0 0;
+      position: relative;
+    }
+    .hero .wrap { padding-left: 48px; padding-right: 48px; }
+    .hero-img {
+      width: 100%; height: 620px;
+      border-radius: 32px;
+      position: relative; overflow: hidden;
+      display: flex; align-items: flex-end;
+    }
+    .hero-img-inner {
+      position: absolute; inset: 0;
+      background: url('../assets/img/hero-dog.jpg') center/cover no-repeat;
+      animation: heroZoom 12s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to   { transform: scale(1.08); }
+    }
+    /* 写真の上に薄いオーバーレイ（テキスト読みやすく） */
+    .hero-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(61,43,31,0.55) 0%,
+        rgba(61,43,31,0.1) 50%,
+        transparent 100%
+      );
+    }
+    .hero-text {
+      position: absolute; bottom: 36px; left: 40px;
+      z-index: 2;
+      animation: fadeInUp 0.8s ease both;
+    }
+    .hero-text h1 {
+      font-size: 26px; font-weight: 700;
+      color: #ffffff; line-height: 1.5;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .hero-text p {
+      font-size: 13px; color: rgba(255,255,255,0.8);
+      margin-top: 6px;
+    }
+
+    /* =====================
+       犬が歩くアニメーション
+    ===================== */
+    .dog-walk-section {
+      height: 80px;
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+    }
+    .walking-dog {
+      position: absolute;
+      bottom: 8px;
+      animation: dogWalk 8s linear infinite;
+      display: flex; flex-direction: column;
+      align-items: center;
+    }
+    .dog-svg { animation: dogBody 0.5s ease-in-out infinite; }
+
+    /* SVGで犬を描く */
+    .paw-trail {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 80px; pointer-events: none;
+    }
+
+    /* =====================
+       コンセプトセクション
+    ===================== */
+    .concept {
+      padding: 72px 0;
+      position: relative;
+    }
+    .concept-inner {
+      max-width: 1000px; margin: 0 auto; padding: 0 60px;
+      display: flex; flex-direction: row;
+      align-items: center; gap: 48px;
+    }
+    @media (max-width: 768px) {
+      .concept-inner {
+        padding: 0 16px;
+        flex-direction: column;
+        align-items: center; text-align: center; gap: 28px;
+      }
+    }
+    /* 左blob */
+    .concept {
+      --blob-op: 0;
+    }
+    .concept.in-view { --blob-op: 0.85; }
+    .concept::before {
+      content: '';
+      position: absolute; left: -60px; top: 20px;
+      width: 220px; height: 220px;
+      background: var(--mustard);
+      animation: blobMorph 8s ease-in-out infinite;
+      z-index: 0;
+      opacity: var(--blob-op);
+      transition: opacity 0.7s ease;
+    }
+    .concept-text {
+      position: relative; z-index: 1;
+      animation: fadeInUp 0.7s ease 0.2s both;
+    }
+    .concept-eyebrow {
+      font-size: 13px; color: var(--teal);
+      letter-spacing: 0.2em; margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .concept-text h2 {
+      font-size: 36px; font-weight: 700;
+      line-height: 1.6; margin-bottom: 20px;
+    }
+    .concept-text p {
+      font-size: 16px; color: var(--text-light);
+      line-height: 2; margin-bottom: 28px;
+    }
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid var(--teal); color: var(--teal);
+      border-radius: 9999px; padding: 10px 28px;
+      font-size: 15px; font-family: inherit;
+      cursor: pointer; background: transparent;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--teal); color: white; }
+    .concept-img-wrap {
+      position: relative; z-index: 1;
+    }
+    .concept-circle {
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B2EBF2, #E0F7FA);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 100px; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,188,212,0.15);
+      animation: float 4s ease-in-out infinite;
+    }
+    /* 右blob */
+    .concept-img-wrap::after {
+      content: '';
+      position: absolute; right: -50px; bottom: -30px;
+      width: 160px; height: 160px;
+      background: var(--mustard);
+      border-radius: 40% 60% 55% 45% / 55% 45% 55% 45%;
+      z-index: -1; opacity: 0.7;
+      animation: blobMorph 10s ease-in-out infinite reverse;
+    }
+
+    /* =====================
+       エサ皿アニメーション
+    ===================== */
+    .bowl-animation-section {
+      display: flex; justify-content: center;
+      padding: 20px 0 40px;
+      gap: 60px;
+    }
+    .bowl-item {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
+      font-size: 12px; color: var(--text-light);
+    }
+    .bowl-wrap {
+      position: relative; width: 80px; height: 80px;
+    }
+    .bowl-svg { animation: bowlBounce 2s ease-in-out infinite; }
+    .kibble {
+      position: absolute;
+      animation: kibbleFall 1.5s ease-in-out infinite;
+    }
+    .kibble:nth-child(2) { animation-delay: 0.3s; left: 30px; top: 0; }
+    .kibble:nth-child(3) { animation-delay: 0.6s; left: 45px; top: 0; }
+    .kibble:nth-child(4) { animation-delay: 0.9s; left: 20px; top: 0; }
+
+    /* =====================
+       サービスカード（横並び左右交互）
+    ===================== */
+    .services { padding: 0 0 60px; }
+    .service-card {
+      display: flex; flex-direction: row; gap: 28px;
+      align-items: center;
+      background: white;
+      border-radius: 24px;
+      padding: 28px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,188,212,0.12);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 5px; border-radius: 0 4px 4px 0;
+      background: var(--teal);
+    }
+    .service-card.reverse { flex-direction: column; }
+
+    .service-imgs {
+      display: flex; gap: 12px; flex-shrink: 0;
+    }
+    .service-img-circle {
+      width: 110px; height: 110px; border-radius: 50%;
+      background: linear-gradient(135deg, #E0F7FA, #B2EBF2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 44px; flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0,188,212,0.15);
+    }
+    .service-img-circle.small {
+      width: 80px; height: 80px; font-size: 32px;
+      background: linear-gradient(135deg, #FFF9C4, #FFF3AA);
+    }
+    .service-body { flex: 1; }
+    .service-tag {
+      font-size: 13px; color: var(--teal);
+      letter-spacing: 0.15em; margin-bottom: 8px;
+    }
+    .service-body h3 {
+      font-size: 22px; font-weight: 700;
+      margin-bottom: 10px; color: var(--text);
+    }
+    .service-body p {
+      font-size: 15px; color: var(--text-light);
+      line-height: 1.9;
+    }
+    .service-body .price {
+      display: inline-block;
+      background: var(--mustard-light);
+      color: var(--text);
+      border-radius: 9999px;
+      padding: 6px 20px; font-size: 14px;
+      margin-top: 12px;
+      border: 1.5px solid var(--mustard);
+    }
+    /* 右側blob装飾 */
+    .blob-right {
+      position: relative;
+      --blob-op: 0;
+    }
+    .blob-right.in-view { --blob-op: 0.8; }
+    .blob-right::after {
+      content: '';
+      position: absolute; right: -80px; top: 50%;
+      transform: translateY(-50%);
+      width: 200px; height: 200px;
+      background: var(--mustard);
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+      z-index: -1;
+      opacity: var(--blob-op);
+      transition: opacity 0.7s ease;
+      animation: blobMorph 9s ease-in-out infinite;
+    }
+    .blob-left {
+      position: relative;
+      --blob-op: 0;
+    }
+    .blob-left.in-view { --blob-op: 0.7; }
+    .blob-left::before {
+      content: '';
+      position: absolute; left: -80px; top: 50%;
+      transform: translateY(-50%);
+      width: 180px; height: 180px;
+      background: var(--mustard);
+      border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
+      z-index: -1;
+      opacity: var(--blob-op);
+      transition: opacity 0.7s ease;
+      animation: blobMorph 11s ease-in-out infinite reverse;
+    }
+
+    /* =====================
+       肉球アニメーション区切り
+    ===================== */
+    .paw-divider {
+      display: flex; justify-content: center;
+      gap: 16px; padding: 24px 0;
+    }
+    .paw-icon {
+      font-size: 22px; opacity: 0;
+      animation: pawAppear 0.4s ease-out forwards;
+    }
+    .paw-icon:nth-child(1) { animation-delay: 0.0s; }
+    .paw-icon:nth-child(2) { animation-delay: 0.15s; }
+    .paw-icon:nth-child(3) { animation-delay: 0.30s; }
+    .paw-icon:nth-child(4) { animation-delay: 0.45s; }
+    .paw-icon:nth-child(5) { animation-delay: 0.60s; }
+
+    /* =====================
+       FAQ
+    ===================== */
+    .faq { padding: 60px 40px; }
+    .faq-title {
+      font-size: 28px; font-weight: 700;
+      margin-bottom: 24px; color: var(--text);
+    }
+    .faq-item {
+      background: white; border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s;
+    }
+    .faq-item:hover { box-shadow: 0 4px 16px rgba(0,188,212,0.1); }
+    .faq-q { font-size: 16px; display: flex; align-items: center; gap: 12px; }
+    .faq-q-mark {
+      width: 28px; height: 28px;
+      background: var(--teal); color: white;
+      border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
+      font-size: 13px; flex-shrink: 0;
+    }
+    .faq-arrow { color: var(--teal); font-size: 18px; }
+    .faq-more {
+      margin-top: 16px;
+    }
+
+    /* =====================
+       フォトグリッド
+    ===================== */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      padding: 0 40px 60px;
+    }
+    .photo-cell {
+      height: 200px;
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 60px; overflow: hidden;
+    }
+    .photo-cell:nth-child(1) { background: linear-gradient(135deg, #E0F7FA, #B2EBF2); }
+    .photo-cell:nth-child(2) { background: linear-gradient(135deg, #FFF9C4, #FFF3AA); }
+    .photo-cell:nth-child(3) { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); }
+
+    /* =====================
+       フッター
+    ===================== */
+    .footer {
+      background: var(--cream-deep);
+      padding: 56px 40px 32px;
+    }
+    .footer-top {
+      display: flex; flex-direction: column; gap: 28px;
+      margin-bottom: 32px;
+    }
+    .footer-logo {
+      font-size: 20px; font-weight: 700;
+      color: var(--teal-dark);
+      display: flex; align-items: center; gap: 8px;
+      flex-shrink: 0;
+    }
+    .footer-reserve {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .btn-reserve-lg {
+      background: var(--teal); color: white;
+      border: none; border-radius: 12px;
+      padding: 14px 32px; font-size: 16px;
+      font-family: inherit; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,188,212,0.3);
+    }
+    .footer-nav {
+      display: flex; gap: 32px;
+    }
+    .footer-nav-col { display: flex; flex-direction: column; gap: 10px; }
+    .footer-nav a { font-size: 14px; color: var(--text-light); text-decoration: none; }
+    .footer-bottom {
+      border-top: 1px solid rgba(0,188,212,0.15);
+      padding-top: 20px;
+      display: flex; justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy { font-size: 13px; color: var(--text-light); }
+    .social-icons { display: flex; gap: 14px; font-size: 18px; }
+  </style>
+</head>
+<body>
+
+<!-- ドロワーオーバーレイ -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+<!-- ドロワーメニュー -->
+<div class="drawer" id="drawer">
+  <a href="#">メニュー・料金</a>
+  <a href="#">仕上がり例</a>
+  <a href="#">アクセス</a>
+  <a href="#">よくある質問</a>
+  <button class="btn-reserve">予約する</button>
+</div>
+
+<!-- ヘッダー -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-paw">🐾</span> ワン-ルベル
+    </div>
+    <nav class="nav">
+      <a href="#">メニュー</a>
+      <a href="#">仕上がり例</a>
+      <a href="#">アクセス</a>
+      <a href="#">よくある質問</a>
+      <button class="btn-reserve">予約する</button>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="wrap">
+  <div class="hero-img">
+    <div class="hero-img-inner"></div>
+    <div class="hero-text">
+      <h1>大切なわんちゃんを、<br>プロが丁寧にケア。</h1>
+      <p>山口市のトリミングサロン & ペットホテル</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- 犬が歩くアニメーション -->
+<div class="dog-walk-section">
+  <div class="walking-dog">
+    <svg class="dog-svg" width="72" height="48" viewBox="0 0 72 48">
+      <!-- 体 -->
+      <ellipse cx="36" cy="28" rx="20" ry="12" fill="#F5C842" stroke="#C49A22" stroke-width="1.5"/>
+      <!-- 頭 -->
+      <circle cx="56" cy="22" r="11" fill="#F5C842" stroke="#C49A22" stroke-width="1.5"/>
+      <!-- 耳 -->
+      <ellipse cx="61" cy="14" rx="5" ry="7" fill="#C49A22" transform="rotate(15 61 14)"/>
+      <!-- 目 -->
+      <circle cx="60" cy="21" r="2" fill="#4A3728"/>
+      <circle cx="61" cy="20.5" r="0.7" fill="white"/>
+      <!-- 鼻 -->
+      <ellipse cx="66" cy="24" rx="2.5" ry="1.5" fill="#4A3728"/>
+      <!-- しっぽ -->
+      <path d="M16 26 Q8 18 12 12" stroke="#C49A22" stroke-width="3" stroke-linecap="round" fill="none">
+        <animateTransform attributeName="transform" type="rotate" values="0 16 26;15 16 26;-10 16 26;0 16 26" dur="0.6s" repeatCount="indefinite"/>
+      </path>
+      <!-- 前脚右 -->
+      <rect x="48" y="36" width="5" height="14" rx="2.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5" transform-origin="48 36">
+        <animateTransform attributeName="transform" type="rotate" values="20 48 36;-20 48 36;20 48 36" dur="0.5s" repeatCount="indefinite"/>
+      </rect>
+      <!-- 前脚左 -->
+      <rect x="41" y="36" width="5" height="14" rx="2.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5" transform-origin="41 36">
+        <animateTransform attributeName="transform" type="rotate" values="-20 41 36;20 41 36;-20 41 36" dur="0.5s" repeatCount="indefinite"/>
+      </rect>
+      <!-- 後脚右 -->
+      <rect x="26" y="36" width="5" height="14" rx="2.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5" transform-origin="26 36">
+        <animateTransform attributeName="transform" type="rotate" values="-20 26 36;20 26 36;-20 26 36" dur="0.5s" repeatCount="indefinite"/>
+      </rect>
+      <!-- 後脚左 -->
+      <rect x="19" y="36" width="5" height="14" rx="2.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5" transform-origin="19 36">
+        <animateTransform attributeName="transform" type="rotate" values="20 19 36;-20 19 36;20 19 36" dur="0.5s" repeatCount="indefinite"/>
+      </rect>
+    </svg>
+  </div>
+</div>
+
+<!-- コンセプト -->
+<section class="concept">
+  <div class="concept-inner">
+    <div class="concept-img-wrap">
+      <div class="concept-circle">🐩</div>
+    </div>
+    <div class="concept-text">
+      <div class="concept-eyebrow">About</div>
+      <h2>わんちゃんにとっての、<br>第二の家。</h2>
+      <p>ワン-ルベルは、大切な家族の一員であるわんちゃんが安心して過ごせる場所です。資格を持つスタッフが一匹一匹に寄り添い、心地よいケアをお届けします。</p>
+      <button class="btn-outline">ワン-ルベルとは ›</button>
+    </div>
+  </div>
+</section>
+
+<!-- エサ皿アニメーション -->
+<div class="bowl-animation-section">
+  <div class="bowl-item">
+    <!-- 皿1 -->
+    <div class="bowl-wrap">
+      <svg class="bowl-svg" width="80" height="80" viewBox="0 0 80 80">
+        <!-- 皿 -->
+        <ellipse cx="40" cy="58" rx="28" ry="10" fill="#E0F7FA" stroke="#00BCD4" stroke-width="2"/>
+        <rect x="12" y="48" width="56" height="12" rx="6" fill="#B2EBF2" stroke="#00BCD4" stroke-width="2"/>
+        <!-- エサが溜まるクリップ -->
+        <clipPath id="bowlClip">
+          <rect x="16" y="32" width="48" height="30"/>
+        </clipPath>
+        <!-- エサ粒 -->
+        <g clip-path="url(#bowlClip)">
+          <circle cx="30" cy="46" r="4" fill="#F5C842" opacity="0">
+            <animate attributeName="cy" values="20;46" dur="1.2s" repeatCount="indefinite" begin="0s"/>
+            <animate attributeName="opacity" values="0;1;1" dur="1.2s" repeatCount="indefinite" begin="0s"/>
+          </circle>
+          <circle cx="40" cy="46" r="4" fill="#FFB74D" opacity="0">
+            <animate attributeName="cy" values="20;46" dur="1.2s" repeatCount="indefinite" begin="0.4s"/>
+            <animate attributeName="opacity" values="0;1;1" dur="1.2s" repeatCount="indefinite" begin="0.4s"/>
+          </circle>
+          <circle cx="50" cy="46" r="4" fill="#F5C842" opacity="0">
+            <animate attributeName="cy" values="20;46" dur="1.2s" repeatCount="indefinite" begin="0.8s"/>
+            <animate attributeName="opacity" values="0;1;1" dur="1.2s" repeatCount="indefinite" begin="0.8s"/>
+          </circle>
+        </g>
+      </svg>
+    </div>
+    <span>毎日のごはん</span>
+  </div>
+
+  <div class="bowl-item">
+    <!-- ハート -->
+    <div style="font-size: 48px; animation: float 2s ease-in-out infinite; animation-delay: 0.3s;">🐾</div>
+    <span>大切なケア</span>
+  </div>
+
+  <div class="bowl-item">
+    <!-- 水皿 -->
+    <div class="bowl-wrap">
+      <svg class="bowl-svg" width="80" height="80" viewBox="0 0 80 80">
+        <ellipse cx="40" cy="58" rx="28" ry="10" fill="#E0F7FA" stroke="#00BCD4" stroke-width="2"/>
+        <rect x="12" y="48" width="56" height="12" rx="6" fill="#B2EBF2" stroke="#00BCD4" stroke-width="2"/>
+        <!-- 水が溜まる -->
+        <clipPath id="waterClip">
+          <rect x="14" y="36" width="52" height="20"/>
+        </clipPath>
+        <g clip-path="url(#waterClip)">
+          <rect x="14" y="36" width="52" rx="4" fill="#81D4FA" opacity="0.7">
+            <animate attributeName="height" values="0;20" dur="2s" repeatCount="indefinite" begin="0s"/>
+            <animate attributeName="y" values="56;36" dur="2s" repeatCount="indefinite" begin="0s"/>
+          </rect>
+          <!-- 水滴 -->
+          <ellipse cx="40" cy="20" rx="4" ry="6" fill="#29B6F6" opacity="0">
+            <animate attributeName="cy" values="10;50" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+            <animate attributeName="opacity" values="0;0.8;0" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+          </ellipse>
+        </g>
+      </svg>
+    </div>
+    <span>新鮮なお水</span>
+  </div>
+</div>
+
+<!-- paw区切り -->
+<div class="paw-divider">
+  <span class="paw-icon">🐾</span>
+  <span class="paw-icon">🐾</span>
+  <span class="paw-icon">🐾</span>
+  <span class="paw-icon">🐾</span>
+  <span class="paw-icon">🐾</span>
+</div>
+
+<!-- サービスカード -->
+<section class="services">
+  <div class="wrap">
+  <!-- カード1 -->
+  <div class="service-card blob-right">
+    <div class="service-imgs">
+      <div class="service-img-circle">✂️</div>
+      <div class="service-img-circle small">🛁</div>
+    </div>
+    <div class="service-body">
+      <div class="service-tag">SERVICE 01</div>
+      <h3>全犬種トリミング</h3>
+      <p>小型犬〜大型犬まで全犬種に対応。資格を持つスタッフが一匹一匹丁寧にケアします。シャンプー・カット・爪切り・耳掃除まで。</p>
+      <span class="price">¥3,500〜</span>
+    </div>
+  </div>
+
+  <!-- カード2（逆） -->
+  <div class="service-card reverse blob-left">
+    <div class="service-imgs">
+      <div class="service-img-circle">🏠</div>
+      <div class="service-img-circle small">📷</div>
+    </div>
+    <div class="service-body">
+      <div class="service-tag">SERVICE 02</div>
+      <h3>ペットホテル</h3>
+      <p>24時間スタッフが在住。ペットカメラ付きなので、旅行中もスマホでわんちゃんの様子を確認できます。日帰り〜長期滞在まで対応。</p>
+      <span class="price">¥3,500〜</span>
+    </div>
+  </div>
+
+  <!-- カード3 -->
+  <div class="service-card blob-right">
+    <div class="service-imgs">
+      <div class="service-img-circle">🎓</div>
+      <div class="service-img-circle small">🏅</div>
+    </div>
+    <div class="service-body">
+      <div class="service-tag">SERVICE 03</div>
+      <h3>資格豊富なスタッフ</h3>
+      <p>トリマー中級ライセンス・動物看護師中級ライセンス認定・愛玩動物飼養管理士二級・キャットグルーマーライセンス認定など、多数の資格を保有。</p>
+      <span class="price">安心のプロ対応</span>
+    </div>
+  </div>
+  </div><!-- /wrap -->
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap">
+  <div class="faq-title">よくある質問</div>
+  <div class="faq-item">
+    <div class="faq-q">
+      <span class="faq-q-mark">Q</span>
+      当日予約は可能ですか？
+    </div>
+    <span class="faq-arrow">›</span>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">
+      <span class="faq-q-mark">Q</span>
+      初めてでも大丈夫ですか？
+    </div>
+    <span class="faq-arrow">›</span>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">
+      <span class="faq-q-mark">Q</span>
+      生後何ヶ月から入室できますか？
+    </div>
+    <span class="faq-arrow">›</span>
+  </div>
+  <div class="faq-more">
+    <button class="btn-outline">もっと見る ›</button>
+  </div>
+  </div><!-- /wrap -->
+</section>
+
+<!-- フォトグリッド -->
+<div class="photo-grid wrap">
+  <div class="photo-cell">🐕</div>
+  <div class="photo-cell">✂️</div>
+  <div class="photo-cell">🐩</div>
+</div>
+
+<!-- フッター -->
+<footer class="footer">
+  <div class="wrap footer-top">
+    <div>
+      <div class="footer-logo">🐾 ワン-ルベル</div>
+      <div style="margin-top: 16px;" class="footer-reserve">
+        <button class="btn-reserve-lg" style="background: var(--mustard); color: var(--text); box-shadow: 0 4px 14px rgba(245,200,66,0.4);">
+          📅 予約・お問い合わせ
+        </button>
+        <button class="btn-reserve-lg">
+          ご予約はこちら
+        </button>
+      </div>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-nav-col">
+        <a href="#">ワン-ルベルとは</a>
+        <a href="#">トリミング料金</a>
+        <a href="#">ペットホテル</a>
+        <a href="#">仕上がり例</a>
+      </div>
+      <div class="footer-nav-col">
+        <a href="#">アクセス</a>
+        <a href="#">お知らせ</a>
+        <a href="#">よくある質問</a>
+        <a href="#">プライバシーポリシー</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <div class="footer-copy">© 2026 ワン-ルベル</div>
+    <div class="social-icons">
+      <span>📷</span>
+      <span>▶️</span>
+      <span>🎵</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ハンバーガーメニュー
+  const hamburger = document.getElementById('hamburger');
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('drawerOverlay');
+  function toggleDrawer(open) {
+    hamburger.classList.toggle('open', open);
+    drawer.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+  }
+  hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
+  overlay.addEventListener('click', () => toggleDrawer(false));
+  drawer.querySelectorAll('a, button').forEach(el => el.addEventListener('click', () => toggleDrawer(false)));
+
+  // paw-dividerを繰り返しアニメーション
+  setInterval(() => {
+    document.querySelectorAll('.paw-icon').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.animation = 'none';
+      setTimeout(() => {
+        el.style.animation = `pawAppear 0.4s ease-out ${i * 0.15}s forwards`;
+      }, 100);
+    });
+  }, 3000);
+
+  // スクロール連動：blob・カードのフェードイン/アウト
+  const scrollTargets = document.querySelectorAll(
+    '.blob-right, .blob-left, .concept, .service-card, .faq-item, .bowl-animation-section, .concept-text, .concept-img-wrap'
+  );
+
+  // カード・テキストには透明→表示のフェードも追加
+  document.querySelectorAll('.service-card, .faq-item, .concept-text, .bowl-animation-section').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  });
+  document.querySelectorAll('.concept-img-wrap').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.6s ease 0.15s';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      } else {
+        entry.target.classList.remove('in-view');
+        // blobだけ消す（カードは消さない）
+        if (entry.target.classList.contains('blob-right') ||
+            entry.target.classList.contains('blob-left') ||
+            entry.target.classList.contains('concept')) {
+          // blob opacity はCSS変数が制御するのでclassRemoveだけでOK
+        }
+      }
+    });
+  }, { threshold: 0.15 });
+
+  scrollTargets.forEach(el => observer.observe(el));
+
+  // 足跡がポンポンポンと画面上を流れる
+  const pawContainer = document.createElement('div');
+  pawContainer.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;';
+  document.body.appendChild(pawContainer);
+
+  function spawnPawTrail() {
+    // 斜め方向：左下→右上、または右下→左上の4パターン
+    const patterns = [
+      { dx: 32, dy: -28, startX: -60,                   startY: window.innerHeight * 0.6 + Math.random() * 200, baseAngle: -40 },
+      { dx: 28, dy: -32, startX: -60,                   startY: window.innerHeight * 0.8 + Math.random() * 100, baseAngle: -50 },
+      { dx: -32, dy: -28, startX: window.innerWidth + 60, startY: window.innerHeight * 0.6 + Math.random() * 200, baseAngle: 220 },
+      { dx: -28, dy: -32, startX: window.innerWidth + 60, startY: window.innerHeight * 0.8 + Math.random() * 100, baseAngle: 230 },
+    ];
+    const p = patterns[Math.floor(Math.random() * patterns.length)];
+    const count = 5 + Math.floor(Math.random() * 4);
+    const wobble = () => (Math.random() - 0.5) * 14;
+
+    for (let i = 0; i < count; i++) {
+      setTimeout(() => {
+        const paw = document.createElement('div');
+        // 左右交互にわずかにずらして足跡らしく
+        const sideOffset = (i % 2 === 0 ? 1 : -1) * 14;
+        const perpX = -p.dy / Math.hypot(p.dx, p.dy) * sideOffset;
+        const perpY =  p.dx / Math.hypot(p.dx, p.dy) * sideOffset;
+        const x = p.startX + p.dx * i + perpX + wobble() * 0.3;
+        const y = p.startY + p.dy * i + perpY + wobble() * 0.3;
+        const rotate = p.baseAngle + (i % 2 === 0 ? 10 : -10);
+
+        paw.style.cssText = `
+          position:fixed;
+          left:${x}px;
+          top:${y}px;
+          font-size:20px;
+          transform:rotate(${rotate}deg) scale(0);
+          transition:transform 0.22s cubic-bezier(0.34,1.56,0.64,1);
+          opacity:0.5;
+          filter:drop-shadow(0 2px 4px rgba(0,151,167,0.25));
+        `;
+        paw.textContent = '🐾';
+        pawContainer.appendChild(paw);
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            paw.style.transform = `rotate(${rotate}deg) scale(1)`;
+          });
+        });
+
+        setTimeout(() => {
+          paw.style.transition = 'opacity 0.7s ease';
+          paw.style.opacity = '0';
+          setTimeout(() => paw.remove(), 800);
+        }, 1000 + i * 80);
+
+      }, i * 170);
+    }
+  }
+
+  // 最初は少し待って開始、その後10秒間隔で繰り返し
+  setTimeout(spawnPawTrail, 1500);
+  setInterval(spawnPawTrail, 10000);
+</script>
+
+</body>
+</html>
