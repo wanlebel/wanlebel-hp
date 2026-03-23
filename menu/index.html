@@ -55,7 +55,7 @@
     "sameAs": ["https://www.instagram.com/wan.lebel"]
   }
   </script>
-  
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHB4F90QZH"></script>
   <script>
@@ -75,283 +75,25 @@
   })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
   -->
   <!-- End Google Tag Manager -->
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Zen Maru Gothic -->
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
   <style>
-    :root {
-      --color-main: #F5F0E1;
-      --color-base: #FFFCF7;
-      --color-text: #5C4A3D;
-      --color-accent: #B5DAE8;
+    .price-table { width: 100%; border-collapse: collapse; }
+    .price-table th {
+      background: var(--mustard); color: var(--text);
+      padding: 12px 16px; font-size: 14px; text-align: left; font-weight: 700;
     }
-    
-    * {
-      font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
-    }
-    
-    body {
-      background-color: var(--color-base);
-      color: var(--color-text);
-      line-height: 1.8;
-    }
-    
-    .container-custom {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-    
-    .section-spacing {
-      padding: 80px 0;
-    }
-    
-    @media (max-width: 768px) {
-      .section-spacing {
-        padding: 48px 0;
-      }
-    }
-    
-    .btn-primary {
-      background-color: var(--color-accent);
-      color: var(--color-text);
-      border-radius: 9999px;
-      padding: 12px 32px;
-      box-shadow: 0 2px 8px rgba(92, 74, 61, 0.1);
-      transition: all 0.3s ease-out;
-      display: inline-block;
-      text-decoration: none;
-      font-weight: 400;
-    }
-    
-    .btn-primary:hover {
-      box-shadow: 0 4px 12px rgba(92, 74, 61, 0.15);
-      transform: translateY(-2px);
-    }
-    
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 2px 8px rgba(92, 74, 61, 0.08);
-    }
-    
-    .header-fixed {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 251, 251, 0.95);
-      backdrop-filter: blur(8px);
-      z-index: 50;
-      box-shadow: 0 1px 4px rgba(92, 74, 61, 0.05);
-    }
-    
-    /* ハンバーガーメニュー */
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-      z-index: 60;
-      position: relative;
-      width: 40px;
-      height: 40px;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-    }
-    
-    .hamburger span {
-      width: 24px;
-      height: 2px;
-      background-color: var(--color-text);
-      border-radius: 2px;
-      transition: all 0.4s ease-out;
-      transform-origin: center;
-      display: block;
-      position: absolute;
-      left: 50%;
-      margin-left: -12px;
-    }
-    
-    .hamburger span:nth-child(1) {
-      top: 12px;
-    }
-    
-    .hamburger span:nth-child(2) {
-      top: 19px;
-    }
-    
-    .hamburger span:nth-child(3) {
-      top: 26px;
-    }
-    
-    .hamburger.active span:nth-child(1) {
-      top: 19px;
-      transform: rotate(45deg);
-    }
-    
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-    
-    .hamburger.active span:nth-child(3) {
-      top: 19px;
-      transform: rotate(-45deg);
-    }
-    
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      left: -100%;
-      width: 280px;
-      height: 100vh;
-      background: white;
-      box-shadow: 2px 0 8px rgba(92, 74, 61, 0.1);
-      z-index: 55;
-      transition: left 0.3s ease-out;
-      overflow-y: auto;
-      padding-top: 80px;
-    }
-    
-    .mobile-menu.active {
-      left: 0;
-    }
-    
-    .mobile-menu-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(92, 74, 61, 0.3);
-      z-index: 54;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
-    }
-    
-    .mobile-menu-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .mobile-menu-item {
-      display: block;
-      padding: 16px 24px;
-      color: var(--color-text);
-      text-decoration: none;
-      border-bottom: 1px solid var(--color-main);
-      transition: all 0.3s ease-out;
-    }
-    
-    .mobile-menu-item:hover {
-      background-color: var(--color-main);
-    }
-    
-    .mobile-menu-item.primary {
-      background-color: var(--color-accent);
-      font-weight: 700;
-      margin: 16px;
-      border-radius: 9999px;
-      text-align: center;
-      border: none;
-    }
-    
-    .header-logo {
-      flex: 1;
-      text-align: center;
-      white-space: nowrap;
-    }
-    
-    @media (min-width: 769px) {
-      .header-logo {
-        flex: 0;
-        text-align: left;
-      }
-    }
-    
-    .mobile-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: white;
-      box-shadow: 0 -2px 8px rgba(92, 74, 61, 0.1);
-      z-index: 50;
-      display: none;
-    }
-    
-    @media (max-width: 768px) {
-      .mobile-nav {
-        display: flex;
-      }
-    }
-    
-    .mobile-nav-item {
-      flex: 1;
-      text-align: center;
-      padding: 16px 8px;
-      text-decoration: none;
-      color: var(--color-text);
-      font-size: 12px;
-      transition: all 0.3s ease-out;
-    }
-    
-    .mobile-nav-item.primary {
-      background-color: var(--color-accent);
-      font-weight: 700;
-    }
-    
-    .mobile-nav-item:not(.primary):hover {
-      background-color: var(--color-base);
-    }
-    
-    h1, h2, h3 {
-      font-weight: 700;
-      color: var(--color-text);
-    }
-    
-    h1 {
-      font-size: 2.5rem;
-      line-height: 1.4;
-    }
-    
-    h2 {
-      font-size: 2rem;
-      line-height: 1.5;
-    }
-    
-    h3 {
-      font-size: 1.5rem;
-      line-height: 1.6;
-    }
-    
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-      h2 {
-        font-size: 1.75rem;
-      }
-      h3 {
-        font-size: 1.25rem;
-      }
-    }
+    .price-table td { padding: 10px 16px; font-size: 14px; border-bottom: 1px solid var(--cream-deep); }
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-note { font-size: 13px; color: var(--text-light); margin-top: 12px; }
+    .price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    @media (max-width: 768px) { .price-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -362,300 +104,394 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   -->
   <!-- End Google Tag Manager (noscript) -->
-  
+
   <!-- Header -->
-  <header class="header-fixed">
-    <div class="container-custom">
-      <nav class="flex items-center py-4">
-        <button class="hamburger" id="hamburger" aria-label="メニューを開く">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <a href="/" class="header-logo text-xl font-bold" style="color: var(--color-text);">ワン-ルベル</a>
-        <div class="hidden md:flex items-center gap-6 ml-auto">
-          <a href="/menu" class="hover:opacity-70 transition-opacity duration-300" style="color: var(--color-text);">メニュー</a>
-          <a href="/gallery" class="hover:opacity-70 transition-opacity duration-300" style="color: var(--color-text);">仕上がり例</a>
-          <a href="/access" class="hover:opacity-70 transition-opacity duration-300" style="color: var(--color-text);">アクセス</a>
-          <a href="/faq" class="hover:opacity-70 transition-opacity duration-300" style="color: var(--color-text);">よくある質問</a>
-          <a href="https://stores.jp/wanlebel/reserve" 
-             class="btn-primary" 
-             data-cta="reserve" 
-             data-gtm-label="reserve">予約する</a>
-        </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="/" class="header-logo">ワン-ルベル</a>
+      <nav class="header-nav">
+        <a href="/menu">メニュー</a>
+        <a href="/gallery">仕上がり例</a>
+        <a href="/access">アクセス</a>
+        <a href="/faq">よくある質問</a>
+        <a href="https://stores.jp/wanlebel/reserve" class="btn-primary" style="padding: 8px 20px; font-size: 14px;">予約する</a>
       </nav>
     </div>
   </header>
-  
-  <!-- モバイルメニューオーバーレイ -->
-  <div class="mobile-menu-overlay" id="menuOverlay"></div>
-  
-  <!-- モバイルメニュー -->
-  <nav class="mobile-menu" id="mobileMenu">
-    <a href="/" class="mobile-menu-item">トップ</a>
-    <a href="/menu" class="mobile-menu-item" data-cta="menu" data-gtm-label="menu">メニュー</a>
-    <a href="/gallery" class="mobile-menu-item" data-cta="gallery" data-gtm-label="gallery">仕上がり例</a>
-    <a href="/access" class="mobile-menu-item" data-cta="access" data-gtm-label="access">アクセス</a>
-    <a href="/faq" class="mobile-menu-item" data-cta="faq" data-gtm-label="faq">よくある質問</a>
-    <a href="https://stores.jp/wanlebel/reserve" 
-       class="mobile-menu-item primary" 
-       data-cta="reserve" 
-       data-gtm-label="reserve">予約する</a>
-    <a href="tel:07043455102" 
-       class="mobile-menu-item" 
-       data-cta="phone" 
-       data-gtm-label="phone">TEL 070-4345-5102</a>
-    <a href="https://www.instagram.com/wan.lebel?igsh=enI5Z2RycXM5Mnoz&utm_source=qr" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       class="mobile-menu-item" 
-       data-cta="instagram" 
-       data-gtm-label="instagram">Instagram</a>
-  </nav>
-  
-  <main style="margin-top: 80px;">
-    <!-- Page Header -->
-    <section class="section-spacing" style="background: linear-gradient(to bottom, var(--color-main), var(--color-base));">
-      <div class="container-custom text-center">
-        <h1 class="mb-6">メニュー・料金</h1>
-        <p class="text-lg max-w-2xl mx-auto">トリミングとペットホテルをご用意しています。愛犬のサイズやご希望に合わせたメニューをお選びいただけます。お支払いは施術後、店頭にてお願いしております。</p>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="drawer" id="drawer">
+    <a href="/">トップ</a>
+    <a href="/menu">メニュー・料金</a>
+    <a href="/gallery">仕上がり例</a>
+    <a href="/access">アクセス</a>
+    <a href="/faq">よくある質問</a>
+    <a href="https://www.instagram.com/wan.lebel" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://stores.jp/wanlebel/reserve" class="drawer-reserve">予約する</a>
+  </div>
+
+  <main style="margin-top: 64px;">
+    <div class="announce-banner">🎉 2026年5月20日（水）グランドオープン予定！　山口市宮野下にて皆さまのご来店をお待ちしています</div>
+
+    <!-- Page Hero -->
+    <div class="page-hero">
+      <div class="wrap">
+        <h1>メニュー・料金</h1>
+        <p>トリミング・ペットホテル料金のご案内</p>
       </div>
-    </section>
-    
-    <!-- Menu List -->
-    <section class="section-spacing">
-      <div class="container-custom">
-        <div class="max-w-3xl mx-auto space-y-8">
-          <!-- 小型犬 -->
-          <div class="card">
-            <h2 class="mb-6">小型犬（〜7kgまで）</h2>
-            <ul class="space-y-4 text-sm">
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">チワワL</span><br>シャンプー 4,000円　シャンプー&amp;カット 6,000円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">チワワスムース</span><br>シャンプー 3,500円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ダックス</span><br>カット 4,500円　シャンプー&amp;カット 6,500円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">パグ</span><br>シャンプー 4,500円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ポメラニアン</span><br>シャンプー 5,500円　シャンプー&amp;カット 7,000円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">マルチーズ</span><br>シャンプー 5,500円　シャンプー&amp;カット 7,000円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">シーズー</span><br>シャンプー 5,500円　シャンプー&amp;カット 7,000円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ヨーキー</span><br>シャンプー 5,500円　シャンプー&amp;カット 7,000円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">トイプードル（〜4kgまで）</span><br>シャンプー 5,500円　シャンプー&amp;カット 7,000円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ペキニーズ</span><br>シャンプー 5,000円　シャンプー&amp;カット 6,500円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ミニチュアピンシャー</span><br>シャンプー 3,500円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">シュナウザー</span><br>シャンプー 6,000円　シャンプー&amp;カット 8,000円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">パピオン</span><br>シャンプー 4,500円　シャンプー&amp;カット 6,500円</li>
-              <li class="pb-3"><span class="font-bold">ビジョンフリーゼ</span><br>シャンプー 6,000円　シャンプー&amp;カット 8,000円</li>
-            </ul>
-            <div class="mt-6">
-              <img src="/assets/img/price-small-dog.jpg" alt="小型犬トリミング料金表" style="width: 100%; border-radius: 12px;">
-            </div>
-          </div>
+    </div>
 
-          <!-- 中型犬 -->
-          <div class="card">
-            <h2 class="mb-6">中型犬</h2>
-            <ul class="space-y-4 text-sm">
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">柴犬（小）5〜10kg</span><br>シャンプー 6,300円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ビーグル</span><br>シャンプー 6,300円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ボストンテリア（10kgまで）</span><br>シャンプー 6,300円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">MIX犬（10kg〜）</span><br>シャンプー 6,500円　シャンプー&amp;カット 応相談</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">アメリカンブリー</span><br>シャンプー 6,000円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">コーギー</span><br>シャンプー 6,500円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">キャバリア</span><br>シャンプー 6,500円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">フレンチブルドッグ</span><br>シャンプー 4,000円〜</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ボーダーコリー</span><br>シャンプー 8,500円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">シェルティー</span><br>シャンプー 7,000円　シャンプー&amp;カット 8,500円</li>
-              <li class="pb-3"><span class="font-bold">アメリカンコッカー</span><br>シャンプー 7,000円　シャンプー&amp;カット 8,500円（相談）</li>
-            </ul>
-            <p class="text-sm mt-4" style="color: var(--color-text); opacity: 0.8;">※換毛期は追加料金（500円〜1,000円）がかかることがあります</p>
-            <div class="mt-6">
-              <img src="/assets/img/price-medium-dog.jpg" alt="中型犬トリミング料金表" style="width: 100%; border-radius: 12px;">
-            </div>
-          </div>
-
-          <!-- 大型犬 -->
-          <div class="card">
-            <h2 class="mb-6">大型犬</h2>
-            <ul class="space-y-4 text-sm">
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ゴールデンレトリバー</span><br>シャンプー 9,000円〜　シャンプー&amp;カット 15,000円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ラブラドール</span><br>シャンプー 7,500円</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ゴールデンドゥードル</span><br>シャンプー 9,000円〜　シャンプー&amp;カット 15,000円〜</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">Gシェパード</span><br>シャンプー 9,000円〜</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ハスキー</span><br>シャンプー 15,000円〜</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">スタンダードプードル</span><br>シャンプー 9,000円〜　シャンプー&amp;カット 15,000円〜</li>
-              <li class="pb-3 border-b" style="border-color: var(--color-main);"><span class="font-bold">ピレニーズ</span><br>応相談</li>
-              <li class="pb-3"><span class="font-bold">ピットブル</span><br>応相談</li>
-            </ul>
-            <p class="text-sm mt-4" style="color: var(--color-text); opacity: 0.8;">※換毛期は追加料金（500円〜1,000円）がかかることがあります</p>
-            <div class="mt-6">
-              <img src="/assets/img/price-large-dog.jpg" alt="大型犬トリミング料金表" style="width: 100%; border-radius: 12px;">
-            </div>
-          </div>
-
-          <!-- ペットホテル -->
-          <div class="card">
-            <h2 class="mb-4">ペットホテル</h2>
-            <p class="mb-6">お出かけの際も安心してお預かりできます。愛犬が快適に過ごせる環境をご用意しています。</p>
-            <div class="space-y-3 mb-6">
-              <div class="py-3 border-b" style="border-color: var(--color-main);">
-                <div class="font-bold mb-1">小型犬（8kg未満）</div>
-                <div class="flex gap-6 text-sm">
-                  <span>1泊2日 3,500円</span>
-                  <span>日帰り 3,000円</span>
-                </div>
-              </div>
-              <div class="py-3 border-b" style="border-color: var(--color-main);">
-                <div class="font-bold mb-1">中型犬（8kg〜15kg未満）</div>
-                <div class="flex gap-6 text-sm">
-                  <span>1泊2日 5,500円</span>
-                  <span>日帰り 5,000円</span>
-                </div>
-              </div>
-              <div class="py-3 border-b" style="border-color: var(--color-main);">
-                <div class="font-bold mb-1">大型犬（15kg〜25kg未満）</div>
-                <div class="flex gap-6 text-sm">
-                  <span>1泊2日 7,500円</span>
-                  <span>日帰り 7,000円</span>
-                </div>
-              </div>
-              <div class="py-3 border-b" style="border-color: var(--color-main);">
-                <div class="font-bold mb-1">超大型犬（25kg〜50kg未満）</div>
-                <div class="flex gap-6 text-sm">
-                  <span>1泊2日 9,500円</span>
-                  <span>日帰り 9,000円</span>
-                </div>
-              </div>
-            </div>
-            <div class="space-y-2 mb-6 text-sm" style="background-color: var(--color-main); border-radius: 12px; padding: 16px;">
-              <p>⭐ 24時間スタッフ在住</p>
-              <p>⭐ ペットカメラ付き（飼い主さんがいつでも確認できます）</p>
-              <p>⭐ お散歩特典無料</p>
-            </div>
-            <div class="space-y-1 text-sm" style="color: var(--color-text); opacity: 0.8;">
-              <p>※フードはご自身で持参お願いします</p>
-              <p>※ホテル宿泊中のトリミング 20%OFF</p>
-              <p>※2泊以降の連泊は通常料金より10%割引</p>
-              <p>※5泊以降は15%割引</p>
-              <p>※繁忙期（お盆・GW・年末年始）は通常料金の25%増し</p>
-            </div>
-            <div class="mt-6">
-              <img src="/assets/img/price-hotel.jpg" alt="ペットホテル料金表" style="width: 100%; border-radius: 12px;">
-            </div>
+    <!-- 小型犬 -->
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">小型犬（〜7kgまで）</h2>
+        <div class="card fade-in">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>犬種</th>
+                <th>メニュー・料金</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>チワワL</strong></td>
+                <td>シャンプー 4,000円　シャンプー&amp;カット 6,000円</td>
+              </tr>
+              <tr>
+                <td><strong>チワワスムース</strong></td>
+                <td>シャンプー 3,500円</td>
+              </tr>
+              <tr>
+                <td><strong>ダックス</strong></td>
+                <td>カット 4,500円　シャンプー&amp;カット 6,500円</td>
+              </tr>
+              <tr>
+                <td><strong>パグ</strong></td>
+                <td>シャンプー 4,500円</td>
+              </tr>
+              <tr>
+                <td><strong>ポメラニアン</strong></td>
+                <td>シャンプー 5,500円　シャンプー&amp;カット 7,000円</td>
+              </tr>
+              <tr>
+                <td><strong>マルチーズ</strong></td>
+                <td>シャンプー 5,500円　シャンプー&amp;カット 7,000円</td>
+              </tr>
+              <tr>
+                <td><strong>シーズー</strong></td>
+                <td>シャンプー 5,500円　シャンプー&amp;カット 7,000円</td>
+              </tr>
+              <tr>
+                <td><strong>ヨーキー</strong></td>
+                <td>シャンプー 5,500円　シャンプー&amp;カット 7,000円</td>
+              </tr>
+              <tr>
+                <td><strong>トイプードル（〜4kgまで）</strong></td>
+                <td>シャンプー 5,500円　シャンプー&amp;カット 7,000円</td>
+              </tr>
+              <tr>
+                <td><strong>ペキニーズ</strong></td>
+                <td>シャンプー 5,000円　シャンプー&amp;カット 6,500円</td>
+              </tr>
+              <tr>
+                <td><strong>ミニチュアピンシャー</strong></td>
+                <td>シャンプー 3,500円</td>
+              </tr>
+              <tr>
+                <td><strong>シュナウザー</strong></td>
+                <td>シャンプー 6,000円　シャンプー&amp;カット 8,000円</td>
+              </tr>
+              <tr>
+                <td><strong>パピオン</strong></td>
+                <td>シャンプー 4,500円　シャンプー&amp;カット 6,500円</td>
+              </tr>
+              <tr>
+                <td><strong>ビジョンフリーゼ</strong></td>
+                <td>シャンプー 6,000円　シャンプー&amp;カット 8,000円</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top: 24px;">
+            <img src="/assets/img/price-small-dog.jpg" alt="小型犬トリミング料金表" style="width: 100%; border-radius: 12px;">
           </div>
         </div>
       </div>
     </section>
-    
-    <!-- Payment Info -->
-    <section class="section-spacing" style="background-color: var(--color-main);">
-      <div class="container-custom">
-        <div class="max-w-2xl mx-auto text-center">
-          <h2 class="mb-6">お支払いについて</h2>
-          <p class="mb-4">お支払いは施術後、店頭にてお願いしております。</p>
-          <p class="mb-6">現金、各種クレジットカード、電子マネーに対応しています。事前決済はございません。</p>
+
+    <!-- 中型犬 -->
+    <section class="section" style="background: var(--cream-deep);">
+      <div class="wrap">
+        <h2 class="section-title">中型犬</h2>
+        <div class="card fade-in">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>犬種</th>
+                <th>メニュー・料金</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>柴犬（小）5〜10kg</strong></td>
+                <td>シャンプー 6,300円</td>
+              </tr>
+              <tr>
+                <td><strong>ビーグル</strong></td>
+                <td>シャンプー 6,300円</td>
+              </tr>
+              <tr>
+                <td><strong>ボストンテリア（10kgまで）</strong></td>
+                <td>シャンプー 6,300円</td>
+              </tr>
+              <tr>
+                <td><strong>MIX犬（10kg〜）</strong></td>
+                <td>シャンプー 6,500円　シャンプー&amp;カット 応相談</td>
+              </tr>
+              <tr>
+                <td><strong>アメリカンブリー</strong></td>
+                <td>シャンプー 6,000円</td>
+              </tr>
+              <tr>
+                <td><strong>コーギー</strong></td>
+                <td>シャンプー 6,500円</td>
+              </tr>
+              <tr>
+                <td><strong>キャバリア</strong></td>
+                <td>シャンプー 6,500円</td>
+              </tr>
+              <tr>
+                <td><strong>フレンチブルドッグ</strong></td>
+                <td>シャンプー 4,000円〜</td>
+              </tr>
+              <tr>
+                <td><strong>ボーダーコリー</strong></td>
+                <td>シャンプー 8,500円</td>
+              </tr>
+              <tr>
+                <td><strong>シェルティー</strong></td>
+                <td>シャンプー 7,000円　シャンプー&amp;カット 8,500円</td>
+              </tr>
+              <tr>
+                <td><strong>アメリカンコッカー</strong></td>
+                <td>シャンプー 7,000円　シャンプー&amp;カット 8,500円（相談）</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="price-note">※換毛期は追加料金（500円〜1,000円）がかかることがあります</p>
+          <div style="margin-top: 24px;">
+            <img src="/assets/img/price-medium-dog.jpg" alt="中型犬トリミング料金表" style="width: 100%; border-radius: 12px;">
+          </div>
         </div>
       </div>
     </section>
-    
+
+    <!-- 大型犬 -->
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">大型犬</h2>
+        <div class="card fade-in">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>犬種</th>
+                <th>メニュー・料金</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ゴールデンレトリバー</strong></td>
+                <td>シャンプー 9,000円〜　シャンプー&amp;カット 15,000円</td>
+              </tr>
+              <tr>
+                <td><strong>ラブラドール</strong></td>
+                <td>シャンプー 7,500円</td>
+              </tr>
+              <tr>
+                <td><strong>ゴールデンドゥードル</strong></td>
+                <td>シャンプー 9,000円〜　シャンプー&amp;カット 15,000円〜</td>
+              </tr>
+              <tr>
+                <td><strong>Gシェパード</strong></td>
+                <td>シャンプー 9,000円〜</td>
+              </tr>
+              <tr>
+                <td><strong>ハスキー</strong></td>
+                <td>シャンプー 15,000円〜</td>
+              </tr>
+              <tr>
+                <td><strong>スタンダードプードル</strong></td>
+                <td>シャンプー 9,000円〜　シャンプー&amp;カット 15,000円〜</td>
+              </tr>
+              <tr>
+                <td><strong>ピレニーズ</strong></td>
+                <td>応相談</td>
+              </tr>
+              <tr>
+                <td><strong>ピットブル</strong></td>
+                <td>応相談</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="price-note">※換毛期は追加料金（500円〜1,000円）がかかることがあります</p>
+          <div style="margin-top: 24px;">
+            <img src="/assets/img/price-large-dog.jpg" alt="大型犬トリミング料金表" style="width: 100%; border-radius: 12px;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ペットホテル -->
+    <section class="section" style="background: var(--cream-deep);">
+      <div class="wrap">
+        <h2 class="section-title">ペットホテル</h2>
+        <div class="card fade-in">
+          <p style="margin-bottom: 24px;">お出かけの際も安心してお預かりできます。愛犬が快適に過ごせる環境をご用意しています。</p>
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>サイズ</th>
+                <th>1泊2日</th>
+                <th>日帰り</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>小型犬（8kg未満）</strong></td>
+                <td>3,500円</td>
+                <td>3,000円</td>
+              </tr>
+              <tr>
+                <td><strong>中型犬（8kg〜15kg未満）</strong></td>
+                <td>5,500円</td>
+                <td>5,000円</td>
+              </tr>
+              <tr>
+                <td><strong>大型犬（15kg〜25kg未満）</strong></td>
+                <td>7,500円</td>
+                <td>7,000円</td>
+              </tr>
+              <tr>
+                <td><strong>超大型犬（25kg〜50kg未満）</strong></td>
+                <td>9,500円</td>
+                <td>9,000円</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="background: var(--teal-light); border-radius: 12px; padding: 16px; margin-top: 20px;">
+            <p style="margin-bottom: 8px;">⭐ 24時間スタッフ在住</p>
+            <p style="margin-bottom: 8px;">⭐ ペットカメラ付き（飼い主さんがいつでも確認できます）</p>
+            <p>⭐ お散歩特典無料</p>
+          </div>
+
+          <div style="margin-top: 16px;">
+            <p class="price-note">※フードはご自身で持参お願いします</p>
+            <p class="price-note">※ホテル宿泊中のトリミング 20%OFF</p>
+            <p class="price-note">※2泊以降の連泊は通常料金より10%割引</p>
+            <p class="price-note">※5泊以降は15%割引</p>
+            <p class="price-note">※繁忙期（お盆・GW・年末年始）は通常料金の25%増し</p>
+          </div>
+
+          <div style="margin-top: 24px;">
+            <img src="/assets/img/price-hotel.jpg" alt="ペットホテル料金表" style="width: 100%; border-radius: 12px;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- お支払いについて -->
+    <section class="section">
+      <div class="wrap">
+        <h2 class="section-title">お支払いについて</h2>
+        <div class="card fade-in" style="max-width: 600px; margin: 0 auto; text-align: center;">
+          <p style="margin-bottom: 12px;">お支払いは施術後、店頭にてお願いしております。</p>
+          <p>現金、各種クレジットカード、電子マネーに対応しています。事前決済はございません。</p>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA -->
-    <section class="section-spacing">
-      <div class="container-custom text-center">
-        <h2 class="mb-6">ご予約はこちら</h2>
-        <p class="mb-8">ご希望のメニューをお選びいただき、オンラインからご予約ください。</p>
-        <a href="https://stores.jp/wanlebel/reserve" 
-           class="btn-primary text-lg px-8 py-4" 
-           data-cta="reserve" 
-           data-gtm-label="reserve">予約する</a>
+    <section class="section" style="background: var(--cream-deep); text-align: center;">
+      <div class="wrap">
+        <h2 class="section-title">ご予約はこちら</h2>
+        <p style="margin-bottom: 32px; color: var(--text-light);">ご希望のメニューをお選びいただき、オンラインからご予約ください。</p>
+        <a href="https://stores.jp/wanlebel/reserve" class="btn-primary" target="_blank" rel="noopener noreferrer">予約する</a>
       </div>
     </section>
   </main>
-  
+
   <!-- Footer -->
-  <footer style="background-color: var(--color-main); padding: 60px 0 100px;">
-    <div class="container-custom">
-      <div class="grid md:grid-cols-3 gap-8 mb-8">
-        <div>
-          <h3 class="mb-4 font-bold">ワン-ルベル</h3>
-          <p class="text-sm">山口市の犬専門トリミングサロン</p>
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <h2>ワン-ルベル</h2>
+          <p>山口市のトリミングサロン&amp;ペットホテル<br>
+             〒754-0001 山口県山口市宮野下2930-1<br>
+             TEL: 070-4345-5102<br>
+             営業時間: 9:00〜18:00 / 不定休</p>
         </div>
-        <div>
-          <h3 class="mb-4 font-bold">営業時間</h3>
-          <p class="text-sm mb-2">9:00 - 18:00</p>
-          <p class="text-sm">定休日：不定休</p>
-        </div>
-        <div>
-          <h3 class="mb-4 font-bold">アクセス</h3>
-          <p class="text-sm mb-2">〒754-0001</p>
-          <p class="text-sm mb-4">山口県山口市宮野下2930-1</p>
-          <a href="/access" class="text-sm underline hover:opacity-70 transition-opacity duration-300">詳しく見る</a>
+        <div class="footer-links">
+          <div class="footer-links-group">
+            <h3>Pages</h3>
+            <a href="/menu">メニュー・料金</a>
+            <a href="/gallery">仕上がり例</a>
+            <a href="/access">アクセス</a>
+            <a href="/faq">よくある質問</a>
+          </div>
+          <div class="footer-links-group">
+            <h3>Links</h3>
+            <a href="https://stores.jp/wanlebel/reserve" target="_blank" rel="noopener noreferrer">オンライン予約</a>
+            <a href="https://www.instagram.com/wan.lebel" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="/policy">プライバシーポリシー</a>
+          </div>
         </div>
       </div>
-      <div class="border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="flex gap-4">
-          <a href="https://www.instagram.com/wan.lebel?igsh=enI5Z2RycXM5Mnoz&utm_source=qr" 
-             target="_blank" 
-             rel="noopener noreferrer"
-             class="text-sm hover:opacity-70 transition-opacity duration-300" 
-             data-cta="instagram" 
-             data-gtm-label="instagram">Instagram</a>
-          <a href="tel:07043455102" 
-             target="_blank" 
-             rel="noopener noreferrer"
-             class="text-sm hover:opacity-70 transition-opacity duration-300" 
-             data-cta="phone" 
-             data-gtm-label="phone">TEL 070-4345-5102</a>
-        </div>
-        <div>
-          <a href="/policy" class="text-sm hover:opacity-70 transition-opacity duration-300">プライバシーポリシー</a>
-        </div>
-        <p class="text-sm">&copy; 2024 ワン-ルベル. All rights reserved.</p>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 ワン-ルベル</div>
       </div>
     </div>
   </footer>
-  
-  <!-- Mobile Navigation -->
-  <nav class="mobile-nav">
-    <a href="https://stores.jp/wanlebel/reserve" 
-       class="mobile-nav-item primary" 
-       data-cta="reserve" 
-       data-gtm-label="reserve">予約する</a>
-    <a href="/menu" 
-       class="mobile-nav-item" 
-       data-cta="menu" 
-       data-gtm-label="menu">メニュー</a>
-    <a href="tel:07043455102" 
-       class="mobile-nav-item" 
-       data-cta="phone" 
-       data-gtm-label="phone">電話する</a>
+  <nav class="mobile-bottom-nav">
+    <a href="https://stores.jp/wanlebel/reserve" target="_blank" rel="noopener noreferrer">
+      <span class="nav-icon">📅</span>予約する
+    </a>
+    <a href="/menu"><span class="nav-icon">✂️</span>メニュー</a>
+    <a href="/access"><span class="nav-icon">📍</span>アクセス</a>
+    <a href="https://www.instagram.com/wan.lebel" target="_blank" rel="noopener noreferrer">
+      <span class="nav-icon">📷</span>Instagram
+    </a>
   </nav>
-  
+
   <!-- Scripts -->
-  <script src="/assets/js/config.js"></script>
-  <script src="/assets/js/gtm-events.js"></script>
   <script>
-    // ハンバーガーメニューの開閉
-    document.addEventListener('DOMContentLoaded', function() {
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuOverlay = document.getElementById('menuOverlay');
-      
-      function toggleMenu() {
-        hamburger.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        menuOverlay.classList.toggle('active');
-        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-      }
-      
-      hamburger.addEventListener('click', toggleMenu);
-      menuOverlay.addEventListener('click', toggleMenu);
-      
-      // メニュー内のリンクをクリックしたらメニューを閉じる
-      const menuItems = mobileMenu.querySelectorAll('.mobile-menu-item');
-      menuItems.forEach(function(item) {
-        item.addEventListener('click', function() {
-          toggleMenu();
-        });
+  (function() {
+    // ドロワーメニュー
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawerOverlay');
+    function toggleDrawer(open) {
+      hamburger.classList.toggle('open', open);
+      drawer.classList.toggle('open', open);
+      overlay.classList.toggle('open', open);
+    }
+    hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
+    overlay.addEventListener('click', () => toggleDrawer(false));
+    drawer.querySelectorAll('a').forEach(el => el.addEventListener('click', () => toggleDrawer(false)));
+  })();
+
+  (function() {
+    // スクロールフェードイン
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
       });
-    });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  })();
   </script>
 </body>
 </html>
