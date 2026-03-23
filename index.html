@@ -592,22 +592,28 @@
           <div class="bowl-wrap" style="animation-delay: 0.3s;">
             <svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <!-- 水滴 -->
-              <ellipse cx="40" cy="10" rx="4" ry="6" fill="#29B6F6" opacity="0">
-                <animate attributeName="cy" values="0;38" dur="1.8s" repeatCount="indefinite" begin="0.3s"/>
-                <animate attributeName="opacity" values="0;0.9;0" dur="1.8s" repeatCount="indefinite" begin="0.3s"/>
+              <ellipse cx="40" cy="8" rx="3.5" ry="5" fill="#29B6F6" opacity="0">
+                <animate attributeName="cy" values="4;34" dur="1.8s" repeatCount="indefinite" begin="0.3s"/>
+                <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="0.3s"/>
               </ellipse>
-              <!-- ボウル -->
-              <ellipse cx="40" cy="50" rx="30" ry="9" fill="#B2EBF2" stroke="#0097A7" stroke-width="1.5"/>
-              <path d="M10 50 Q10 58 40 58 Q70 58 70 50" fill="#81D4FA"/>
+              <!-- ボウル（ごはん皿と同じ形、水色）-->
+              <ellipse cx="40" cy="38" rx="32" ry="10" fill="#B2EBF2" stroke="#0097A7" stroke-width="1.5"/>
+              <path d="M8 38 Q8 55 40 55 Q72 55 72 38" fill="#81D4FA"/>
               <!-- 水面 -->
-              <clipPath id="waterClip2">
-                <rect x="12" y="36" width="56" height="20"/>
+              <ellipse cx="40" cy="36" rx="26" ry="7" fill="#E0F7FA"/>
+              <!-- 波紋 -->
+              <clipPath id="waterBowlClip">
+                <ellipse cx="40" cy="36" rx="26" ry="7"/>
               </clipPath>
-              <g clip-path="url(#waterClip2)">
-                <rect x="12" y="36" width="56" height="0" rx="4" fill="#81D4FA" opacity="0.8">
-                  <animate attributeName="height" values="0;18;0" dur="1.8s" repeatCount="indefinite" begin="0s"/>
-                  <animate attributeName="y" values="54;36;54" dur="1.8s" repeatCount="indefinite" begin="0s"/>
-                </rect>
+              <g clip-path="url(#waterBowlClip)">
+                <circle cx="40" cy="36" r="0" fill="none" stroke="#0097A7" stroke-width="1.2" opacity="0.6">
+                  <animate attributeName="r" values="0;22" dur="1.8s" repeatCount="indefinite" begin="0.4s"/>
+                  <animate attributeName="opacity" values="0.6;0" dur="1.8s" repeatCount="indefinite" begin="0.4s"/>
+                </circle>
+                <circle cx="40" cy="36" r="0" fill="none" stroke="#0097A7" stroke-width="1.2" opacity="0.4">
+                  <animate attributeName="r" values="0;22" dur="1.8s" repeatCount="indefinite" begin="1.0s"/>
+                  <animate attributeName="opacity" values="0.4;0" dur="1.8s" repeatCount="indefinite" begin="1.0s"/>
+                </circle>
               </g>
             </svg>
           </div>
