@@ -238,7 +238,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="section fade-in" style="background: var(--cream);">
+    <section class="section fade-in blob-left" style="background: var(--cream);">
       <div class="wrap" style="max-width: 780px;">
         <h2 class="section-title">よくある質問</h2>
 
@@ -611,6 +611,20 @@
         var answer = btn.nextElementSibling;
         answer.classList.toggle('open', !expanded);
       });
+    });
+  })();
+
+  (function() {
+    var blobObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('blob-visible');
+          blobObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.blob-left, .blob-right, .blob-teal-accent').forEach(function(el) {
+      blobObserver.observe(el);
     });
   })();
   </script>

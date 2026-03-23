@@ -479,7 +479,7 @@
     </section>
 
     <!-- ── 2. Concept ── -->
-    <section class="concept-section">
+    <section class="concept-section blob-left">
       <div class="wrap">
         <div class="concept-inner fade-in">
           <div class="concept-photo">
@@ -525,12 +525,12 @@
         <p class="section-eyebrow fade-in">Services</p>
         <h2 class="section-title fade-in">サービスについて</h2>
         <div class="services-grid">
-          <div class="service-card fade-in">
+          <div class="service-card fade-in blob-right">
             <div class="service-icon-circle">✂️</div>
             <h3>トリミング</h3>
             <p>全身のカット、シャンプー、ドライ、爪切り、耳掃除、肛門腺絞りを含む総合的なケアです。全犬種対応。</p>
           </div>
-          <div class="service-card fade-in">
+          <div class="service-card fade-in blob-left">
             <div class="service-icon-circle">🏠</div>
             <h3>ペットホテル</h3>
             <p>24時間スタッフ在住・ペットカメラ付きで安心。お出かけの際も愛犬が快適に過ごせる環境をご用意しています。</p>
@@ -627,7 +627,7 @@
     </section>
 
     <!-- ── 7. CTA / Reserve ── -->
-    <section class="cta-section">
+    <section class="cta-section blob-teal-accent">
       <div class="wrap fade-in">
         <h2>ご予約・お問い合わせ</h2>
         <p>ご予約はオンラインから、ご相談はお電話からお気軽にどうぞ。</p>
@@ -797,17 +797,19 @@
     })();
 
     // ── Blob装飾 (scroll observer) ──
-    document.querySelectorAll('.blob-deco').forEach(function(blob) {
-      blob.style.transform = 'scale(0.5)';
-      const blobObs = new IntersectionObserver(function(entries) {
+    (function() {
+      var blobObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(e) {
           if (e.isIntersecting) {
-            e.target.classList.add('visible');
+            e.target.classList.add('blob-visible');
+            blobObserver.unobserve(e.target);
           }
         });
-      }, { threshold: 0.1 });
-      blobObs.observe(blob);
-    });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.blob-left, .blob-right, .blob-teal-accent').forEach(function(el) {
+        blobObserver.observe(el);
+      });
+    })();
   </script>
 </body>
 </html>

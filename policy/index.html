@@ -151,7 +151,7 @@
     </section>
 
     <!-- Policy Content -->
-    <section class="section fade-in" style="background: var(--cream);">
+    <section class="section fade-in blob-teal-accent" style="background: var(--cream);">
       <div class="wrap" style="max-width: 720px;">
         <div class="policy-card">
           <div class="policy-section">
@@ -296,6 +296,20 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  })();
+
+  (function() {
+    var blobObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('blob-visible');
+          blobObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.blob-left, .blob-right, .blob-teal-accent').forEach(function(el) {
+      blobObserver.observe(el);
+    });
   })();
   </script>
 </body>
