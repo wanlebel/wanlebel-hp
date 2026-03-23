@@ -141,7 +141,7 @@
       gap: 8px;
     }
     .faq-item {
-      background: #FFFCF7;
+      background: var(--cream);
       border-radius: 12px;
       overflow: hidden;
     }
@@ -178,7 +178,7 @@
       transition: max-height 0.3s ease, padding 0.3s ease;
     }
     .faq-answer.open {
-      max-height: 300px;
+      max-height: 600px;
       padding: 0 20px 16px;
     }
     .faq-answer p {
@@ -247,35 +247,35 @@
           <h3 class="faq-cat-title">予約について</h3>
           <div class="faq-list">
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1" id="faq-btn-1">
                 <span>予約はどのようにすればよいですか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-btn-1">
                 <p>オンライン予約ページからご予約いただけます。ご希望の日時・メニューを選択してお申し込みください。お電話でのご相談も受け付けています（070-4345-5102）。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2" id="faq-btn-2">
                 <span>当日の飛び込みは可能ですか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-btn-2">
                 <p>空き状況によってはご対応できる場合がございます。当日ご来店の前に、お電話にてご確認ください（070-4345-5102）。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3" id="faq-btn-3">
                 <span>予約のキャンセル・変更はできますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-btn-3">
                 <p>はい、可能です。前日までにお電話またはオンライン予約ページよりご連絡ください。当日のキャンセルはなるべくお早めにご連絡いただけると助かります。</p>
               </div>
             </div>
@@ -287,57 +287,57 @@
           <h3 class="faq-cat-title">トリミングについて</h3>
           <div class="faq-list">
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4" id="faq-btn-4">
                 <span>施術にどのくらいの時間がかかりますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-btn-4">
                 <p>目安として、小型犬は1.5〜2時間、中型犬は2〜3時間、大型犬は3時間以上かかる場合があります。毛量・毛の状態・初めてのご来店かどうかによって前後します。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5" id="faq-btn-5">
                 <span>希望するカットスタイルを伝えることはできますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-btn-5">
                 <p>もちろんです。参考になる写真をお持ちいただいたり、写真を事前にお送りいただくとスムーズです。ご来店時にも丁寧にご相談しながら進めます。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-6" id="faq-btn-6">
                 <span>子犬や高齢犬でも対応してもらえますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-6" role="region" aria-labelledby="faq-btn-6">
                 <p>はい、対応しています。子犬の場合は初めてのトリミング体験を大切に、ストレスをなるべくかけないよう丁寧に進めます。高齢犬は体の状態に合わせて無理のない範囲で対応いたします。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-7" id="faq-btn-7">
                 <span>シャンプーのみでも利用できますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-7" role="region" aria-labelledby="faq-btn-7">
                 <p>はい、シャンプーのみのご利用も承っています。メニューページにてシャンプー単体の料金をご確認ください。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-8" id="faq-btn-8">
                 <span>換毛期とはいつですか？追加料金はかかりますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-8" role="region" aria-labelledby="faq-btn-8">
                 <p>一般的に春（3〜5月）と秋（9〜11月）が換毛期です。抜け毛が多い時期は通常より作業量が増えるため、500円〜1,000円の追加料金をいただく場合があります。</p>
               </div>
             </div>
@@ -349,68 +349,68 @@
           <h3 class="faq-cat-title">ペットホテルについて</h3>
           <div class="faq-list">
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-9" id="faq-btn-9">
                 <span>チェックイン・チェックアウトの時間は？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-9" role="region" aria-labelledby="faq-btn-9">
                 <p>営業時間内（9:00〜18:00）にお越しください。時間外のお預かりについてはご相談ください。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-10" id="faq-btn-10">
                 <span>フードは持参しないといけませんか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-10" role="region" aria-labelledby="faq-btn-10">
                 <p>はい、フードはご自身でお持ちいただくようお願いしています。いつも食べているフードを必要分お持ちください。食器はこちらでご用意します。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-11" id="faq-btn-11">
                 <span>ペットカメラはどこから確認できますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-11" role="region" aria-labelledby="faq-btn-11">
                 <p>お預け時にカメラのURL等をお伝えします。スマートフォンからいつでも様子をご確認いただけます。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-12" id="faq-btn-12">
                 <span>お散歩特典とは何ですか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-12" role="region" aria-labelledby="faq-btn-12">
                 <p>ホテル宿泊中のワンちゃんに無料でお散歩サービスを提供しています。運動不足やストレス解消のためにスタッフが毎日お散歩に連れて行きます。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-13" id="faq-btn-13">
                 <span>宿泊中にトリミングもお願いできますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-13" role="region" aria-labelledby="faq-btn-13">
                 <p>はい、ホテル宿泊中のトリミングは20%OFFでご利用いただけます。一緒にご予約ください。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-14" id="faq-btn-14">
                 <span>繁忙期はいつですか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-14" role="region" aria-labelledby="faq-btn-14">
                 <p>お盆・GW・年末年始は繁忙期となり、通常料金の25%増しとなります。この時期のご予約はお早めにどうぞ。</p>
               </div>
             </div>
@@ -422,46 +422,46 @@
           <h3 class="faq-cat-title">健康・安全について</h3>
           <div class="faq-list">
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-15" id="faq-btn-15">
                 <span>ワクチン接種は必要ですか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-15" role="region" aria-labelledby="faq-btn-15">
                 <p>はい、混合ワクチンと狂犬病ワクチンの接種をお願いしています。ペットホテルご利用の場合は接種証明書をお持ちください。他のワンちゃんへの感染予防のためご協力をお願いします。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-16" id="faq-btn-16">
                 <span>ノミ・ダニがいても預けられますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-16" role="region" aria-labelledby="faq-btn-16">
                 <p>ノミ・ダニが確認された場合は、他のワンちゃんへの影響を防ぐためにお断りする場合があります。ご来店前にノミ・ダニ対策をしていただくようお願いします。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-17" id="faq-btn-17">
                 <span>薬を服用している場合でも利用できますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-17" role="region" aria-labelledby="faq-btn-17">
                 <p>はい、対応しています。お預け時に薬の名前・用量・投薬タイミングを必ずお知らせください。責任を持ってお世話します。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-18" id="faq-btn-18">
                 <span>体調が悪い場合はどうなりますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-18" role="region" aria-labelledby="faq-btn-18">
                 <p>宿泊中に体調の変化が見られた場合は、すぐにご連絡いたします。また、トリミング中に体調不良が疑われる場合は施術を中断し、安全を優先して対応します。</p>
               </div>
             </div>
@@ -473,24 +473,24 @@
           <h3 class="faq-cat-title">料金・支払いについて</h3>
           <div class="faq-list">
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-19" id="faq-btn-19">
                 <span>支払い方法を教えてください</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-19" role="region" aria-labelledby="faq-btn-19">
                 <p>お支払いは施術後、店頭にてお願いしております。現金・各種クレジットカード・電子マネーに対応しています。事前決済はございません。</p>
               </div>
             </div>
             <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-20" id="faq-btn-20">
                 <span>料金に爪切りや耳掃除は含まれていますか？</span>
                 <svg class="faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="faq-answer">
+              <div class="faq-answer" id="faq-answer-20" role="region" aria-labelledby="faq-btn-20">
                 <p>シャンプー&amp;カットのコースには爪切り・耳掃除が含まれています。シャンプーのみの場合はご相談ください。</p>
               </div>
             </div>
