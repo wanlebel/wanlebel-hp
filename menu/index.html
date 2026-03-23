@@ -92,8 +92,6 @@
     .price-table td { padding: 10px 16px; font-size: 14px; border-bottom: 1px solid var(--cream-deep); }
     .price-table tr:last-child td { border-bottom: none; }
     .price-note { font-size: 13px; color: var(--text-light); margin-top: 12px; }
-    .price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-    @media (max-width: 768px) { .price-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -151,8 +149,8 @@
           <table class="price-table">
             <thead>
               <tr>
-                <th>犬種</th>
-                <th>メニュー・料金</th>
+                <th scope="col">犬種</th>
+                <th scope="col">メニュー・料金</th>
               </tr>
             </thead>
             <tbody>
@@ -229,8 +227,8 @@
           <table class="price-table">
             <thead>
               <tr>
-                <th>犬種</th>
-                <th>メニュー・料金</th>
+                <th scope="col">犬種</th>
+                <th scope="col">メニュー・料金</th>
               </tr>
             </thead>
             <tbody>
@@ -296,8 +294,8 @@
           <table class="price-table">
             <thead>
               <tr>
-                <th>犬種</th>
-                <th>メニュー・料金</th>
+                <th scope="col">犬種</th>
+                <th scope="col">メニュー・料金</th>
               </tr>
             </thead>
             <tbody>
@@ -352,9 +350,9 @@
           <table class="price-table">
             <thead>
               <tr>
-                <th>サイズ</th>
-                <th>1泊2日</th>
-                <th>日帰り</th>
+                <th scope="col">サイズ</th>
+                <th scope="col">1泊2日</th>
+                <th scope="col">日帰り</th>
               </tr>
             </thead>
             <tbody>
@@ -477,6 +475,7 @@
       hamburger.classList.toggle('open', open);
       drawer.classList.toggle('open', open);
       overlay.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
     }
     hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
     overlay.addEventListener('click', () => toggleDrawer(false));
