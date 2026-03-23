@@ -21,6 +21,7 @@
 
 /* ── 2. リセット・ベース ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; }
 html { scroll-behavior: smooth; }
 body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -280,7 +281,7 @@ h3 { font-size: 20px; font-weight: 700; line-height: 1.5; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* =====================
-   Blob 装飾
+   ブロブ装飾（ページ端）
 ===================== */
 @keyframes blobMorph {
   0%   { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
@@ -289,71 +290,46 @@ h3 { font-size: 20px; font-weight: 700; line-height: 1.5; }
   100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
 }
 
-.blob-right {
-  position: relative;
-  overflow: visible;
-}
-.blob-right::after {
-  content: '';
+.blob-wrap {
   position: absolute;
-  right: -80px; top: 50%;
-  transform: translateY(-50%);
-  width: 200px; height: 200px;
-  background: var(--mustard);
-  border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.7s ease;
-  animation: blobMorph 9s ease-in-out infinite;
+  inset: 0;
   pointer-events: none;
-}
-.blob-right.blob-visible::after { opacity: 0.18; }
-
-.blob-left {
-  position: relative;
-  overflow: visible;
-}
-.blob-left::before {
-  content: '';
-  position: absolute;
-  left: -80px; top: 50%;
-  transform: translateY(-50%);
-  width: 180px; height: 180px;
-  background: var(--mustard);
-  border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
   z-index: 0;
-  opacity: 0;
-  transition: opacity 0.7s ease;
-  animation: blobMorph 11s ease-in-out infinite reverse;
-  pointer-events: none;
+  overflow: hidden;
 }
-.blob-left.blob-visible::before { opacity: 0.18; }
 
-.blob-teal-accent {
-  position: relative;
-  overflow: visible;
-}
-.blob-teal-accent::after {
-  content: '';
+.blob-edge {
   position: absolute;
-  right: -60px; top: -40px;
-  width: 160px; height: 160px;
+  pointer-events: none;
+  animation: blobMorph 10s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.blob-edge.blob-visible { opacity: 1; }
+
+.blob-edge--mustard {
+  background: var(--mustard);
+  opacity: 0.15;
+}
+.blob-edge--mustard.blob-visible { opacity: 0.15; }
+
+.blob-edge--teal {
   background: var(--teal-light);
-  border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.7s ease;
-  animation: blobMorph 12s ease-in-out infinite;
-  pointer-events: none;
+  opacity: 0.55;
 }
-.blob-teal-accent.blob-visible::after { opacity: 0.6; }
+.blob-edge--teal.blob-visible { opacity: 0.55; }
+
+/* サイズバリアント */
+.blob-edge--lg { width: 300px; height: 300px; }
+.blob-edge--md { width: 220px; height: 220px; }
+.blob-edge--sm { width: 160px; height: 160px; }
+
+/* 位置バリアント（ページ端にはみ出す） */
+.blob-edge--right { right: -100px; animation-direction: normal; }
+.blob-edge--left  { left: -100px;  animation-direction: reverse; }
 
 @media (max-width: 768px) {
-  .blob-right::after,
-  .blob-left::before,
-  .blob-teal-accent::after {
-    display: none;
-  }
+  .blob-edge { display: none; }
 }
 
 /* ── 15. ページヒーロー（サブページ用） ── */

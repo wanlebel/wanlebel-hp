@@ -130,7 +130,12 @@
     <a href="https://stores.jp/wanlebel/reserve" class="drawer-reserve">予約する</a>
   </nav>
 
-  <main style="margin-top: 64px;">
+  <main style="margin-top: 64px; position: relative;">
+    <div class="blob-wrap" aria-hidden="true">
+      <div class="blob-edge blob-edge--mustard blob-edge--md blob-edge--right" style="top: 25%;"></div>
+      <div class="blob-edge blob-edge--teal blob-edge--sm blob-edge--left" style="top: 68%;"></div>
+    </div>
+
     <div class="announce-banner">
       <p>🐾 グランドオープン：2026年5月20日（水）｜ご予約受付中</p>
     </div>
@@ -144,7 +149,7 @@
     </div>
 
     <!-- 小型犬 -->
-    <section class="section blob-teal-accent">
+    <section class="section">
       <div class="wrap">
         <h2 class="section-title">小型犬（〜7kgまで）</h2>
         <div class="card fade-in">
@@ -502,16 +507,8 @@
   })();
 
   (function() {
-    var blobObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('blob-visible');
-          blobObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.blob-left, .blob-right, .blob-teal-accent').forEach(function(el) {
-      blobObserver.observe(el);
+    document.querySelectorAll('.blob-edge').forEach(function(el) {
+      el.classList.add('blob-visible');
     });
   })();
   </script>
