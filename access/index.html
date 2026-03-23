@@ -85,7 +85,7 @@
 
   <style>
     .access-card {
-      background: var(--cream-sub, #FFFCF7);
+      background: #FFFCF7;
       border-radius: var(--radius-card);
       padding: 32px;
       margin-top: 32px;
@@ -152,7 +152,7 @@
     </div>
   </header>
   <div class="drawer-overlay" id="drawerOverlay"></div>
-  <div class="drawer" id="drawer">
+  <nav class="drawer" id="drawer" role="navigation" aria-label="メインメニュー">
     <a href="/">トップ</a>
     <a href="/menu">メニュー・料金</a>
     <a href="/gallery">仕上がり例</a>
@@ -160,12 +160,12 @@
     <a href="/faq">よくある質問</a>
     <a href="https://www.instagram.com/wan.lebel" target="_blank" rel="noopener noreferrer">Instagram</a>
     <a href="https://stores.jp/wanlebel/reserve" target="_blank" rel="noopener noreferrer" class="drawer-reserve">予約する</a>
-  </div>
+  </nav>
 
   <main style="margin-top: 64px;">
     <!-- Page Hero -->
     <section class="page-hero">
-      <div class="container">
+      <div class="wrap">
         <h1>アクセス・営業時間</h1>
         <p>山口県山口市宮野下にあります</p>
       </div>
@@ -173,10 +173,10 @@
 
     <!-- Access Info -->
     <section class="section fade-in" style="background: var(--cream);">
-      <div class="container" style="max-width: 720px;">
-        <h2 class="section-title">店舗情報</h2>
+      <div class="wrap">
+        <h2 class="section-title" id="store-info-heading">店舗情報</h2>
         <div class="access-card">
-          <table class="access-table">
+          <table class="access-table" aria-labelledby="store-info-heading">
             <tbody>
               <tr>
                 <th scope="row">住所</th>
@@ -206,7 +206,7 @@
 
     <!-- Map -->
     <section class="section fade-in" style="background: var(--cream-deep);">
-      <div class="container" style="max-width: 720px;">
+      <div class="wrap">
         <h2 class="section-title">地図</h2>
         <div style="margin-top: 24px; border-radius: var(--radius-card); overflow: hidden; background: var(--cream); height: 300px; display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 0.9rem;">
           Googleマップ埋め込み予定
@@ -217,7 +217,7 @@
 
     <!-- CTA -->
     <section class="section fade-in" style="background: var(--mustard-light);">
-      <div class="container" style="text-align: center;">
+      <div class="wrap" style="text-align: center;">
         <h2 class="section-title">ご予約はこちら</h2>
         <p class="section-lead">STORESからオンライン予約いただけます</p>
         <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 32px;">
@@ -236,7 +236,7 @@
           <h2>ワン-ルベル</h2>
           <p>山口市のトリミングサロン&amp;ペットホテル<br>
              〒754-0001 山口県山口市宮野下2930-1<br>
-             TEL: 070-4345-5102<br>
+             TEL: <a href="tel:07043455102" style="color: inherit;">070-4345-5102</a><br>
              営業時間: 9:00〜18:00 / 不定休</p>
         </div>
         <div class="footer-links">
@@ -289,6 +289,12 @@
     hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
     overlay.addEventListener('click', () => toggleDrawer(false));
     drawer.querySelectorAll('a').forEach(el => el.addEventListener('click', () => toggleDrawer(false)));
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && hamburger.getAttribute('aria-expanded') === 'true') {
+        toggleDrawer(false);
+        hamburger.focus();
+      }
+    });
   })();
 
   (function() {

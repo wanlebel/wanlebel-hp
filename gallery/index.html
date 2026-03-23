@@ -131,7 +131,7 @@
     </div>
   </header>
   <div class="drawer-overlay" id="drawerOverlay"></div>
-  <div class="drawer" id="drawer">
+  <nav class="drawer" id="drawer" role="navigation" aria-label="メインメニュー">
     <a href="/">トップ</a>
     <a href="/menu">メニュー・料金</a>
     <a href="/gallery">仕上がり例</a>
@@ -139,7 +139,7 @@
     <a href="/faq">よくある質問</a>
     <a href="https://www.instagram.com/wan.lebel" target="_blank" rel="noopener noreferrer">Instagram</a>
     <a href="https://stores.jp/wanlebel/reserve" target="_blank" rel="noopener noreferrer" class="drawer-reserve">予約する</a>
-  </div>
+  </nav>
 
   <main style="margin-top: 64px;">
     <!-- Page Hero -->
@@ -250,11 +250,18 @@
       hamburger.classList.toggle('open', open);
       drawer.classList.toggle('open', open);
       overlay.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
     }
     hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
     overlay.addEventListener('click', () => toggleDrawer(false));
     drawer.querySelectorAll('a').forEach(el => el.addEventListener('click', () => toggleDrawer(false)));
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && hamburger.getAttribute('aria-expanded') === 'true') {
+        toggleDrawer(false);
+        hamburger.focus();
+      }
+    });
   })();
 
   (function() {
