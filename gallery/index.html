@@ -141,7 +141,12 @@
     <a href="https://stores.jp/wanlebel/reserve" target="_blank" rel="noopener noreferrer" class="drawer-reserve">予約する</a>
   </nav>
 
-  <main style="margin-top: 64px;">
+  <main style="margin-top: 64px; position: relative;">
+    <div class="blob-wrap" aria-hidden="true">
+      <div class="blob-edge blob-edge--mustard blob-edge--md blob-edge--right" style="top: 25%;"></div>
+      <div class="blob-edge blob-edge--teal blob-edge--sm blob-edge--left" style="top: 68%;"></div>
+    </div>
+
     <!-- Page Hero -->
     <section class="page-hero">
       <div class="container">
@@ -151,7 +156,7 @@
     </section>
 
     <!-- Gallery Grid -->
-    <section class="section fade-in blob-left" style="background: var(--cream);">
+    <section class="section fade-in" style="background: var(--cream);">
       <div class="wrap">
         <h2 class="section-title">トリミング仕上がり例</h2>
         <p class="section-lead">オープン後、随時更新していきます</p>
@@ -275,16 +280,8 @@
   })();
 
   (function() {
-    var blobObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('blob-visible');
-          blobObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.blob-left, .blob-right, .blob-teal-accent').forEach(function(el) {
-      blobObserver.observe(el);
+    document.querySelectorAll('.blob-edge').forEach(function(el) {
+      el.classList.add('blob-visible');
     });
   })();
   </script>
