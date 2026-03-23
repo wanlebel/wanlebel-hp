@@ -347,12 +347,17 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      width: 100%;
       padding: 20px 24px;
-      cursor: pointer;
       font-weight: 700;
       font-size: 15px;
       gap: 12px;
       user-select: none;
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
       transition: background 0.15s;
     }
     .faq-question:hover {
@@ -570,46 +575,46 @@
         <h2 class="section-title fade-in">よくある質問</h2>
         <div class="faq-list">
           <div class="faq-item fade-in">
-            <div class="faq-question">
+            <button class="faq-question" aria-expanded="false">
               <span>予約はどのようにすればよいですか？</span>
               <span class="arrow">▼</span>
-            </div>
+            </button>
             <div class="faq-answer">
               オンライン予約システムからご予約いただけます。ご希望の日時を選択してお申し込みください。お電話（070-4345-5102）でもご予約を承っております。
             </div>
           </div>
           <div class="faq-item fade-in">
-            <div class="faq-question">
+            <button class="faq-question" aria-expanded="false">
               <span>支払い方法を教えてください</span>
               <span class="arrow">▼</span>
-            </div>
+            </button>
             <div class="faq-answer">
               お支払いは施術後、店頭にてお願いしております。現金、各種クレジットカード、電子マネーに対応しています。事前決済はございません。
             </div>
           </div>
           <div class="faq-item fade-in">
-            <div class="faq-question">
+            <button class="faq-question" aria-expanded="false">
               <span>初めて利用する場合、何か準備は必要ですか？</span>
               <span class="arrow">▼</span>
-            </div>
+            </button>
             <div class="faq-answer">
               特に準備は必要ありません。愛犬と一緒にご来店ください。初回はカウンセリングのお時間をいただきます。ご不明な点がございましたら、お気軽にご相談ください。
             </div>
           </div>
           <div class="faq-item fade-in">
-            <div class="faq-question">
+            <button class="faq-question" aria-expanded="false">
               <span>子犬や高齢犬でも対応してもらえますか？</span>
               <span class="arrow">▼</span>
-            </div>
+            </button>
             <div class="faq-answer">
               はい、対応可能です。子犬から高齢犬まで、それぞれの体調やコンディションに合わせて丁寧にケアいたします。ご不安な点はお気軽にご相談ください。
             </div>
           </div>
           <div class="faq-item fade-in">
-            <div class="faq-question">
+            <button class="faq-question" aria-expanded="false">
               <span>ペットホテルにカメラはありますか？</span>
               <span class="arrow">▼</span>
-            </div>
+            </button>
             <div class="faq-answer">
               はい、ペットカメラを設置しております。お預かり中の愛犬の様子をスマートフォンからご確認いただけます。24時間スタッフが在住しておりますので安心です。
             </div>
@@ -655,7 +660,7 @@
           </div>
           <div class="footer-links-group">
             <h3>Links</h3>
-            <a href="https://stores.jp/wanlebel/reserve" target="_blank">オンライン予約</a>
+            <a href="https://stores.jp/wanlebel/reserve" target="_blank" rel="noopener noreferrer">オンライン予約</a>
             <a href="https://www.instagram.com/wan.lebel" target="_blank" rel="noopener">Instagram</a>
             <a href="/policy">プライバシーポリシー</a>
           </div>
@@ -669,7 +674,7 @@
 
   <!-- ── 9. Mobile bottom nav ── -->
   <nav class="mobile-bottom-nav">
-    <a href="https://stores.jp/wanlebel/reserve" target="_blank">
+    <a href="https://stores.jp/wanlebel/reserve" target="_blank" rel="noopener noreferrer">
       <span class="nav-icon">📅</span>予約する
     </a>
     <a href="/menu"><span class="nav-icon">✂️</span>メニュー</a>
@@ -682,23 +687,32 @@
   <!-- Scripts -->
   <script>
     // ── ドロワーメニュー ──
-    const hamburger = document.getElementById('hamburger');
-    const drawer = document.getElementById('drawer');
-    const overlay = document.getElementById('drawerOverlay');
-    function toggleDrawer(open) {
-      hamburger.classList.toggle('open', open);
-      drawer.classList.toggle('open', open);
-      overlay.classList.toggle('open', open);
-    }
-    hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
-    overlay.addEventListener('click', () => toggleDrawer(false));
-    drawer.querySelectorAll('a').forEach(el => el.addEventListener('click', () => toggleDrawer(false)));
+    (function() {
+      const hamburger = document.getElementById('hamburger');
+      const drawer = document.getElementById('drawer');
+      const overlay = document.getElementById('drawerOverlay');
+      function toggleDrawer(open) {
+        hamburger.classList.toggle('open', open);
+        drawer.classList.toggle('open', open);
+        overlay.classList.toggle('open', open);
+      }
+      hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
+      overlay.addEventListener('click', () => toggleDrawer(false));
+      drawer.querySelectorAll('a').forEach(el => el.addEventListener('click', () => toggleDrawer(false)));
+    })();
 
     // ── スクロールフェードイン ──
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    (function() {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    })();
 
     // ── 犬の歩くアニメーション (rAF) ──
     (function() {
@@ -710,6 +724,7 @@
       const speed = 0.8; // px per frame
       let lastPaw = 0;
       const pawInterval = 80; // px between paw prints
+      let rafId;
 
       function spawnPaw(px) {
         const paw = document.createElement('span');
@@ -721,34 +736,38 @@
       }
 
       function step() {
-        const trackW = track.offsetWidth;
-        x += speed;
-        if (x > trackW + 60) {
-          x = -60;
-          lastPaw = x;
-        }
-        walker.style.left = x + 'px';
+        if (!document.hidden) {
+          const trackW = track.offsetWidth;
+          x += speed;
+          if (x > trackW + 60) {
+            x = -60;
+            lastPaw = x;
+          }
+          walker.style.left = x + 'px';
 
-        if (x - lastPaw > pawInterval) {
-          spawnPaw(x - 20);
-          lastPaw = x;
+          if (x - lastPaw > pawInterval) {
+            spawnPaw(x - 20);
+            lastPaw = x;
+          }
         }
-        requestAnimationFrame(step);
+        rafId = requestAnimationFrame(step);
       }
-      requestAnimationFrame(step);
+      rafId = requestAnimationFrame(step);
     })();
 
     // ── FAQアコーディオン ──
-    document.querySelectorAll('.faq-question').forEach(function(q) {
-      q.addEventListener('click', function() {
-        const item = q.closest('.faq-item');
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const item = btn.closest('.faq-item');
         const wasOpen = item.classList.contains('open');
         // 他を閉じる
         document.querySelectorAll('.faq-item.open').forEach(function(i) {
           i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
         });
         if (!wasOpen) {
           item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
         }
       });
     });
