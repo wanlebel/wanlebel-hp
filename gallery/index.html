@@ -151,7 +151,7 @@
     </section>
 
     <!-- Gallery Grid -->
-    <section class="section fade-in" style="background: var(--cream);">
+    <section class="section fade-in blob-left" style="background: var(--cream);">
       <div class="wrap">
         <h2 class="section-title">トリミング仕上がり例</h2>
         <p class="section-lead">オープン後、随時更新していきます</p>
@@ -272,6 +272,20 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  })();
+
+  (function() {
+    var blobObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('blob-visible');
+          blobObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.blob-left, .blob-right, .blob-teal-accent').forEach(function(el) {
+      blobObserver.observe(el);
+    });
   })();
   </script>
 </body>

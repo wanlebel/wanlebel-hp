@@ -144,7 +144,7 @@
     </div>
 
     <!-- 小型犬 -->
-    <section class="section">
+    <section class="section blob-teal-accent">
       <div class="wrap">
         <h2 class="section-title">小型犬（〜7kgまで）</h2>
         <div class="card fade-in">
@@ -499,6 +499,20 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  })();
+
+  (function() {
+    var blobObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('blob-visible');
+          blobObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.blob-left, .blob-right, .blob-teal-accent').forEach(function(el) {
+      blobObserver.observe(el);
+    });
   })();
   </script>
 </body>
