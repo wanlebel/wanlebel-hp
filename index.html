@@ -145,32 +145,24 @@
     }
 
     /* 犬アニメーション */
+    @keyframes dogBody {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-3px); }
+    }
     .dog-walk-track {
       position: absolute;
-      bottom: 32px; left: 0; right: 0;
-      height: 60px;
+      bottom: 24px; left: 0; right: 0;
+      height: 72px;
       z-index: 3;
-      overflow: hidden;
+      overflow: visible;
       pointer-events: none;
     }
-    .dog-walker {
+    .walking-dog {
       position: absolute;
       bottom: 0;
-      font-size: 36px;
-      filter: drop-shadow(0 2px 4px rgba(61,43,31,0.15));
+      display: flex; align-items: flex-end;
     }
-    .paw-print {
-      position: absolute;
-      bottom: 8px;
-      font-size: 12px;
-      opacity: 0;
-      animation: pawFade 2.5s ease forwards;
-      pointer-events: none;
-    }
-    @keyframes pawFade {
-      0%   { opacity: 0.7; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.6); }
-    }
+    .dog-svg { animation: dogBody 0.5s ease-in-out infinite; }
 
     /* ── コンセプトセクション ── */
     .concept-section {
@@ -219,17 +211,34 @@
       }
     }
 
-    /* ── ごはんアニメーション ── */
+    /* ── ごはん・水・ケアアニメーション ── */
     .bowl-section {
-      text-align: center;
-      padding: 40px 0;
+      padding: 40px 0 48px;
       background: var(--cream);
       overflow: hidden;
+    }
+    .bowl-items {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 48px;
+    }
+    @media (max-width: 480px) {
+      .bowl-items { gap: 24px; }
+    }
+    .bowl-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-light);
     }
     .bowl-wrap {
       display: inline-block;
       animation: bowlBounce 2s ease-in-out infinite;
     }
+    .bowl-wrap:nth-child(1) { animation-delay: 0s; }
     @keyframes bowlBounce {
       0%, 100% { transform: translateY(0); }
       50%      { transform: translateY(-8px); }
@@ -244,6 +253,23 @@
       0%   { opacity: 0; transform: translateY(0); }
       30%  { opacity: 0.7; }
       100% { opacity: 0; transform: translateY(-18px); }
+    }
+    .icon-24h {
+      width: 80px; height: 60px;
+      display: flex; align-items: center; justify-content: center;
+      animation: bowlBounce 2.4s ease-in-out infinite;
+      animation-delay: 0.4s;
+    }
+    .icon-24h-inner {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      border: 2px solid var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      color: var(--teal-dark);
+      line-height: 1.3;
+      text-align: center;
     }
 
     /* ── サービスセクション ── */
@@ -459,7 +485,14 @@
     <a href="https://stores.jp/wanlebel/reserve" class="drawer-reserve">予約する</a>
   </nav>
 
-  <main style="margin-top: 64px;">
+  <main style="margin-top: 64px; position: relative;">
+    <!-- ブロブ装飾 -->
+    <div class="blob-wrap" aria-hidden="true">
+      <div class="blob-edge blob-edge--mustard blob-edge--lg blob-edge--right" style="top: 20%;"></div>
+      <div class="blob-edge blob-edge--teal blob-edge--md blob-edge--left" style="top: 52%;"></div>
+      <div class="blob-edge blob-edge--mustard blob-edge--sm blob-edge--right" style="top: 78%;"></div>
+    </div>
+
     <!-- オープン告知バナー -->
     <div class="announce-banner">
       <p>🐾 グランドオープン：2026年5月20日（水）｜ご予約受付中</p>
@@ -474,7 +507,41 @@
         <a href="https://stores.jp/wanlebel/reserve" class="btn-primary">予約する</a>
       </div>
       <div class="dog-walk-track" id="dogWalkTrack">
-        <div class="dog-walker" id="dogWalker">🐕</div>
+        <div class="walking-dog" id="walkingDog">
+          <svg class="dog-svg" width="82" height="58" viewBox="0 0 82 58" aria-hidden="true">
+            <!-- しっぽ -->
+            <path d="M16 28 Q7 18 12 10" stroke="#C49A22" stroke-width="3" stroke-linecap="round" fill="none">
+              <animateTransform attributeName="transform" type="rotate" values="0 16 28;13 16 28;-8 16 28;0 16 28" dur="0.6s" repeatCount="indefinite"/>
+            </path>
+            <!-- 後脚A -->
+            <rect x="19" y="28" width="7" height="24" rx="3.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5">
+              <animateTransform attributeName="transform" type="rotate" values="-16 22 28;16 22 28;-16 22 28" dur="0.5s" repeatCount="indefinite"/>
+            </rect>
+            <!-- 後脚B -->
+            <rect x="27" y="28" width="7" height="24" rx="3.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5">
+              <animateTransform attributeName="transform" type="rotate" values="16 30 28;-16 30 28;16 30 28" dur="0.5s" repeatCount="indefinite"/>
+            </rect>
+            <!-- 前脚A -->
+            <rect x="46" y="28" width="7" height="24" rx="3.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5">
+              <animateTransform attributeName="transform" type="rotate" values="16 49 28;-16 49 28;16 49 28" dur="0.5s" repeatCount="indefinite"/>
+            </rect>
+            <!-- 前脚B -->
+            <rect x="54" y="28" width="7" height="24" rx="3.5" fill="#F5C842" stroke="#C49A22" stroke-width="1.5">
+              <animateTransform attributeName="transform" type="rotate" values="-16 57 28;16 57 28;-16 57 28" dur="0.5s" repeatCount="indefinite"/>
+            </rect>
+            <!-- 体 -->
+            <ellipse cx="38" cy="27" rx="22" ry="13" fill="#F5C842" stroke="#C49A22" stroke-width="1.5"/>
+            <!-- 頭 -->
+            <circle cx="60" cy="21" r="12" fill="#F5C842" stroke="#C49A22" stroke-width="1.5"/>
+            <!-- 耳 -->
+            <ellipse cx="65" cy="11" rx="5" ry="8" fill="#C49A22" transform="rotate(15 65 11)"/>
+            <!-- 目 -->
+            <circle cx="64" cy="19" r="2.5" fill="#3D2B1F"/>
+            <circle cx="65" cy="18" r="0.8" fill="white"/>
+            <!-- 鼻 -->
+            <ellipse cx="71" cy="23" rx="2.5" ry="1.5" fill="#3D2B1F"/>
+          </svg>
+        </div>
       </div>
     </section>
 
@@ -496,27 +563,72 @@
       </div>
     </section>
 
-    <!-- ── 3. ごはんアニメーション ── -->
+    <!-- ── 3. ごはん・水・ケア ── -->
     <section class="bowl-section fade-in">
-      <div class="bowl-wrap" id="bowlWrap">
-        <svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- 湯気 -->
-          <path class="steam" d="M28 16 Q30 8 28 0" stroke="#E8B84B" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <path class="steam" d="M40 14 Q42 6 40 -2" stroke="#E8B84B" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <path class="steam" d="M52 16 Q54 8 52 0" stroke="#E8B84B" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <!-- ボウル -->
-          <ellipse cx="40" cy="38" rx="32" ry="10" fill="#E8B84B"/>
-          <path d="M8 38 Q8 55 40 55 Q72 55 72 38" fill="#D4A23A"/>
-          <ellipse cx="40" cy="36" rx="26" ry="7" fill="#F5E6C0"/>
-          <!-- フード粒 -->
-          <circle cx="32" cy="34" r="3" fill="#C4903A"/>
-          <circle cx="40" cy="32" r="3.5" fill="#B8842E"/>
-          <circle cx="48" cy="34" r="3" fill="#C4903A"/>
-          <circle cx="36" cy="37" r="2.5" fill="#B8842E"/>
-          <circle cx="44" cy="37" r="2.5" fill="#C4903A"/>
-        </svg>
+      <div class="bowl-items">
+
+        <!-- ごはん -->
+        <div class="bowl-item">
+          <div class="bowl-wrap" id="bowlWrap">
+            <svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path class="steam" d="M28 16 Q30 8 28 0" stroke="#E8B84B" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path class="steam" d="M40 14 Q42 6 40 -2" stroke="#E8B84B" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path class="steam" d="M52 16 Q54 8 52 0" stroke="#E8B84B" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <ellipse cx="40" cy="38" rx="32" ry="10" fill="#E8B84B"/>
+              <path d="M8 38 Q8 55 40 55 Q72 55 72 38" fill="#D4A23A"/>
+              <ellipse cx="40" cy="36" rx="26" ry="7" fill="#F5E6C0"/>
+              <circle cx="32" cy="34" r="3" fill="#C4903A"/>
+              <circle cx="40" cy="32" r="3.5" fill="#B8842E"/>
+              <circle cx="48" cy="34" r="3" fill="#C4903A"/>
+              <circle cx="36" cy="37" r="2.5" fill="#B8842E"/>
+              <circle cx="44" cy="37" r="2.5" fill="#C4903A"/>
+            </svg>
+          </div>
+          <span>おいしいごはん</span>
+        </div>
+
+        <!-- 新鮮なお水 -->
+        <div class="bowl-item">
+          <div class="bowl-wrap" style="animation-delay: 0.3s;">
+            <svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- 水滴 -->
+              <ellipse cx="40" cy="8" rx="3.5" ry="5" fill="#29B6F6" opacity="0">
+                <animate attributeName="cy" values="4;34" dur="1.8s" repeatCount="indefinite" begin="0.3s"/>
+                <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="0.3s"/>
+              </ellipse>
+              <!-- ボウル（ごはん皿と同じ形、水色）-->
+              <ellipse cx="40" cy="38" rx="32" ry="10" fill="#B2EBF2" stroke="#0097A7" stroke-width="1.5"/>
+              <path d="M8 38 Q8 55 40 55 Q72 55 72 38" fill="#81D4FA"/>
+              <!-- 水面 -->
+              <ellipse cx="40" cy="36" rx="26" ry="7" fill="#E0F7FA"/>
+              <!-- 波紋 -->
+              <clipPath id="waterBowlClip">
+                <ellipse cx="40" cy="36" rx="26" ry="7"/>
+              </clipPath>
+              <g clip-path="url(#waterBowlClip)">
+                <circle cx="40" cy="36" r="0" fill="none" stroke="#0097A7" stroke-width="1.2" opacity="0.6">
+                  <animate attributeName="r" values="0;22" dur="1.8s" repeatCount="indefinite" begin="0.4s"/>
+                  <animate attributeName="opacity" values="0.6;0" dur="1.8s" repeatCount="indefinite" begin="0.4s"/>
+                </circle>
+                <circle cx="40" cy="36" r="0" fill="none" stroke="#0097A7" stroke-width="1.2" opacity="0.4">
+                  <animate attributeName="r" values="0;22" dur="1.8s" repeatCount="indefinite" begin="1.0s"/>
+                  <animate attributeName="opacity" values="0.4;0" dur="1.8s" repeatCount="indefinite" begin="1.0s"/>
+                </circle>
+              </g>
+            </svg>
+          </div>
+          <span>新鮮なお水</span>
+        </div>
+
+        <!-- 24時間安心 -->
+        <div class="bowl-item">
+          <div class="icon-24h">
+            <div class="icon-24h-inner">24h<br>安心</div>
+          </div>
+          <span>24時間スタッフ在住</span>
+        </div>
+
       </div>
-      <p style="font-size: 13px; color: var(--text-light); margin-top: 8px;">おいしいごはんも準備してます</p>
     </section>
 
     <!-- ── 4. Services ── -->
@@ -724,43 +836,24 @@
 
     // ── 犬の歩くアニメーション (rAF) ──
     (function() {
-      const track = document.getElementById('dogWalkTrack');
-      const walker = document.getElementById('dogWalker');
-      if (!track || !walker) return;
+      var dog = document.getElementById('walkingDog');
+      var track = document.getElementById('dogWalkTrack');
+      var x = -80, dir = 1;
+      var speed = 1.4;
 
-      let x = -60;
-      const speed = 0.8; // px per frame
-      let lastPaw = 0;
-      const pawInterval = 80; // px between paw prints
-      let rafId;
-
-      function spawnPaw(px) {
-        const paw = document.createElement('span');
-        paw.className = 'paw-print';
-        paw.textContent = '🐾';
-        paw.style.left = px + 'px';
-        track.appendChild(paw);
-        setTimeout(() => paw.remove(), 2500);
+      function tick() {
+        if (document.hidden) { requestAnimationFrame(tick); return; }
+        var maxX = track.offsetWidth;
+        x += dir * speed;
+        dog.style.transformOrigin = '0 100%';
+        dog.style.transform = dir === 1
+          ? 'translateX(' + x + 'px)'
+          : 'translateX(' + (x + 72) + 'px) scaleX(-1)';
+        if (dir === 1 && x >= maxX + 80) { dir = -1; }
+        else if (dir === -1 && x <= -80) { dir = 1; }
+        requestAnimationFrame(tick);
       }
-
-      function step() {
-        if (!document.hidden) {
-          const trackW = track.offsetWidth;
-          x += speed;
-          if (x > trackW + 60) {
-            x = -60;
-            lastPaw = x;
-          }
-          walker.style.left = x + 'px';
-
-          if (x - lastPaw > pawInterval) {
-            spawnPaw(x - 20);
-            lastPaw = x;
-          }
-        }
-        rafId = requestAnimationFrame(step);
-      }
-      rafId = requestAnimationFrame(step);
+      requestAnimationFrame(tick);
     })();
 
     // ── FAQアコーディオン ──
@@ -796,18 +889,12 @@
       bowlObs.observe(bowl);
     })();
 
-    // ── Blob装飾 (scroll observer) ──
-    document.querySelectorAll('.blob-deco').forEach(function(blob) {
-      blob.style.transform = 'scale(0.5)';
-      const blobObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.1 });
-      blobObs.observe(blob);
-    });
+    // ── Blob装飾 ──
+    (function() {
+      document.querySelectorAll('.blob-edge').forEach(function(el) {
+        el.classList.add('blob-visible');
+      });
+    })();
   </script>
 </body>
 </html>

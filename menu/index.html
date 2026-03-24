@@ -130,7 +130,12 @@
     <a href="https://stores.jp/wanlebel/reserve" class="drawer-reserve">予約する</a>
   </nav>
 
-  <main style="margin-top: 64px;">
+  <main style="margin-top: 64px; position: relative;">
+    <div class="blob-wrap" aria-hidden="true">
+      <div class="blob-edge blob-edge--mustard blob-edge--md blob-edge--right" style="top: 25%;"></div>
+      <div class="blob-edge blob-edge--teal blob-edge--sm blob-edge--left" style="top: 68%;"></div>
+    </div>
+
     <div class="announce-banner">
       <p>🐾 グランドオープン：2026年5月20日（水）｜ご予約受付中</p>
     </div>
@@ -499,6 +504,12 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  })();
+
+  (function() {
+    document.querySelectorAll('.blob-edge').forEach(function(el) {
+      el.classList.add('blob-visible');
+    });
   })();
   </script>
 </body>

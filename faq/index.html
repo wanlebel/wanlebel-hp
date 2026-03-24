@@ -228,7 +228,12 @@
     <a href="https://stores.jp/wanlebel/reserve" target="_blank" rel="noopener noreferrer" class="drawer-reserve">予約する</a>
   </nav>
 
-  <main style="margin-top: 64px;">
+  <main style="margin-top: 64px; position: relative;">
+    <div class="blob-wrap" aria-hidden="true">
+      <div class="blob-edge blob-edge--mustard blob-edge--md blob-edge--right" style="top: 25%;"></div>
+      <div class="blob-edge blob-edge--teal blob-edge--sm blob-edge--left" style="top: 68%;"></div>
+    </div>
+
     <!-- Page Hero -->
     <section class="page-hero">
       <div class="wrap">
@@ -611,6 +616,12 @@
         var answer = btn.nextElementSibling;
         answer.classList.toggle('open', !expanded);
       });
+    });
+  })();
+
+  (function() {
+    document.querySelectorAll('.blob-edge').forEach(function(el) {
+      el.classList.add('blob-visible');
     });
   })();
   </script>

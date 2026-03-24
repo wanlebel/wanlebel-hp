@@ -21,6 +21,7 @@
 
 /* ── 2. リセット・ベース ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { overflow-x: hidden; }
 html { scroll-behavior: smooth; }
 body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -278,6 +279,58 @@ h3 { font-size: 20px; font-weight: 700; line-height: 1.5; }
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* =====================
+   ブロブ装飾（ページ端）
+===================== */
+@keyframes blobMorph {
+  0%   { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+  33%  { border-radius: 40% 60% 30% 70% / 60% 30% 70% 40%; }
+  66%  { border-radius: 70% 30% 50% 50% / 40% 60% 40% 60%; }
+  100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+}
+
+.blob-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.blob-edge {
+  position: absolute;
+  pointer-events: none;
+  animation: blobMorph 10s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.blob-edge.blob-visible { opacity: 1; }
+
+.blob-edge--mustard {
+  background: var(--mustard);
+  opacity: 0.15;
+}
+.blob-edge--mustard.blob-visible { opacity: 0.15; }
+
+.blob-edge--teal {
+  background: var(--teal-light);
+  opacity: 0.55;
+}
+.blob-edge--teal.blob-visible { opacity: 0.55; }
+
+/* サイズバリアント */
+.blob-edge--lg { width: 300px; height: 300px; }
+.blob-edge--md { width: 220px; height: 220px; }
+.blob-edge--sm { width: 160px; height: 160px; }
+
+/* 位置バリアント（ページ端にはみ出す） */
+.blob-edge--right { right: -100px; animation-direction: normal; }
+.blob-edge--left  { left: -100px;  animation-direction: reverse; }
+
+@media (max-width: 768px) {
+  .blob-edge { display: none; }
+}
 
 /* ── 15. ページヒーロー（サブページ用） ── */
 .page-hero {
