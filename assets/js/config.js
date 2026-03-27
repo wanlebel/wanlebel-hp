@@ -1,7 +1,7 @@
 // CTA定数設定
 const CTA_CONFIG = {
   reserve: {
-    url: 'https://stores.jp/wanlebel/reserve', // 仮URL
+    url: 'https://wanlebel.stores.jp/reserve/wanlebel-miyano/4577150', // 仮URL
     label: '予約する',
     gtmLabel: 'reserve'
   },
