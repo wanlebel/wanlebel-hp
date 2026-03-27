@@ -32,7 +32,7 @@
 | FAQ | 変更なし |
 | ポリシー | 変更なし |
 
-OGPの `og:title`・`twitter:title` も同様に更新する。
+`og:title`・`twitter:title` も同じ値に更新する（各ページのそれぞれのmeta要素）。
 
 ---
 
@@ -47,13 +47,21 @@ OGPの `og:title`・`twitter:title` も同様に更新する。
 | FAQ | 変更なし |
 | ポリシー | 変更なし |
 
-OGPの `og:description`・`twitter:description` も同様に更新する。
+`og:description`・`twitter:description` も同じ値に更新する。
 
 ---
 
-### 3. JSON-LD（`LocalBusiness`）強化 — 全ページ共通
+### 3. JSON-LD（`LocalBusiness`）強化
 
-以下のフィールドを全ページのJSON-LDに追加する。
+#### 対象ファイルと構造について
+
+- `index.html`・`menu/index.html`・`gallery/index.html`・`access/index.html`・`policy/index.html` の5ページ：
+  フラットな `"@type": "LocalBusiness"` の単一オブジェクト。この `{}` 内に以下のフィールドを追加する。
+
+- `faq/index.html` のみ：
+  `@graph` 配列を使い `LocalBusiness` と `FAQPage` が1つの `<script>` ブロック内に共存している。`@graph[0]`（`"@type": "LocalBusiness"` のノード）に以下のフィールドを追加する。**新しい `<script>` ブロックは追加しない。**
+
+#### 追加するフィールド（全6ページのLocalBusinessノード共通）
 
 ```json
 "telephone": "070-4345-5102",
@@ -64,43 +72,71 @@ OGPの `og:description`・`twitter:description` も同様に更新する。
   "latitude": 34.197496,
   "longitude": 131.502849
 },
-"hasMap": "https://maps.google.com/?q=ワン-ルベル+山口市宮野下2930-1",
-"openingHoursSpecification": {
-  "@type": "OpeningHoursSpecification",
-  "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-  "opens": "09:00",
-  "closes": "18:00"
-}
+"hasMap": "https://maps.google.com/?cid=wanlebel"
 ```
 
-※ `openingHoursSpecification` は不定休のため全曜日を記載するが、実態に合わせて将来変更可能。
+※ `hasMap` はURLエンコードが不要なGoogle Maps CIDリンク形式を使用。実際のPlace IDが判明したら更新すること。暫定的に `https://goo.gl/maps/wanlebel` 等でも可。最悪省略可。
+
+#### `openingHoursSpecification` について
+
+既存の `access/index.html` などでは `openingHoursSpecification` がすでに配列形式で記載されている。**この配列は変更しない。** 上記フィールドを追加するだけでよい。`openingHoursSpecification` が未記載のページにのみ以下を追加する：
+
+```json
+"openingHoursSpecification": [
+  {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  }
+]
+```
 
 ---
 
-### 4. FAQPage スキーマ — `/faq/` のみ
+### 4. FAQPage スキーマ強化 — `/faq/` のみ
 
-`/faq/index.html` の既存 `LocalBusiness` JSON-LDに加えて、`FAQPage` スキーマを別の `<script type="application/ld+json">` として追加する。
+`faq/index.html` の既存 `@graph[1]`（`"@type": "FAQPage"` ノード）の `mainEntity` を、現在の6問から以下の8問に拡張する。**既存の6問は内容を変えず保持し、2問を追加する。**
 
-対象Q&A：FAQページ全20問のうち検索需要が高い以下の7問を含める。
+**既存の6問（変更なし）：**
+1. 予約はどのようにすればよいですか？
+2. 予約のキャンセル・変更はできますか？
+3. 施術にどのくらいの時間がかかりますか？
+4. フードは持参しないといけませんか？
+5. ワクチン接種は必要ですか？
+6. 支払い方法を教えてください
 
-1. 予約方法（オンライン・電話）
-2. 当日予約の可否
-3. 初めてのトリミング・子犬の受け入れ
-4. ペットホテルの料金・何泊から預けられるか
-5. ペットホテルのカメラ・スタッフ常駐について
-6. ワクチン接種の必要性
-7. 支払い方法
+**追加する2問（HTMLの本文テキストと完全一致させること）：**
+
+```json
+{
+  "@type": "Question",
+  "name": "当日の飛び込みは可能ですか？",
+  "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "空き状況によってはご対応できる場合がございます。当日ご来店の前に、お電話にてご確認ください（070-4345-5102）。"
+  }
+},
+{
+  "@type": "Question",
+  "name": "子犬や高齢犬でも対応してもらえますか？",
+  "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "はい、対応しています。子犬の場合は初めてのトリミング体験を大切に、ストレスをなるべくかけないよう丁寧に進めます。高齢犬は体の状態に合わせて無理のない範囲で対応いたします。"
+  }
+}
+```
 
 ---
 
 ### 5. `/access/` 本文テキスト補強
 
-店舗情報テーブルの「所在地」欄に「宮野」を追記し、「駐車場」行を追加する。
+`access/index.html` の店舗情報テーブルにある `<th>住所</th>` 行の `<td>` を以下に変更する：
 
-```
-所在地：山口県山口市宮野下2930-1（宮野エリア）
-駐車場：4台（無料）
-```
+**変更前：** `山口県山口市宮野下2930-1`
+**変更後：** `山口県山口市宮野下2930-1（宮野エリア）`
+
+※駐車場行はすでに `4台（無料）` の記載があるため変更不要。
 
 ---
 
@@ -110,6 +146,7 @@ OGPの `og:description`・`twitter:description` も同様に更新する。
 - デザイン・レイアウト・JavaScript — 一切変更なし
 - `sitemap.xml` — URLの変更はないため更新不要
 - 資格名の明記 — 確認書待ちのため今回は含めない
+- 既存の `openingHoursSpecification` 配列 — 変更しない
 
 ---
 
