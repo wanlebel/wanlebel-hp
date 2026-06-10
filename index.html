@@ -315,8 +315,7 @@
     .service-card {
       background: var(--white);
       border-radius: var(--radius-card);
-      padding: 36px 24px;
-      text-align: center;
+      overflow: hidden;
       box-shadow: var(--shadow-card);
       transition: transform 0.25s, box-shadow 0.25s;
     }
@@ -334,6 +333,12 @@
       align-items: center;
       justify-content: center;
       font-size: 28px;
+    }
+    .service-card-img {
+      width: 100%; height: 180px; object-fit: cover;
+    }
+    .service-card-body {
+      padding: 24px; text-align: center;
     }
     .service-card h3 {
       margin-bottom: 12px;
@@ -665,19 +670,27 @@
         <h2 class="section-title fade-in">サービスについて</h2>
         <div class="services-grid">
           <div class="service-card fade-in">
-            <div class="service-icon-circle">✂️</div>
-            <h3>トリミング</h3>
-            <p>全身のカット、シャンプー、ドライ、爪切り、耳掃除、肛門腺絞りを含む総合的なケアです。全犬種対応。</p>
+            <img class="service-card-img" src="/assets/img/trimming-yorkie.jpg" alt="トリミング風景">
+            <div class="service-card-body">
+              <div class="service-icon-circle">✂️</div>
+              <h3>トリミング</h3>
+              <p>全身のカット、シャンプー、ドライ、爪切り、耳掃除、肛門腺絞りを含む総合的なケアです。全犬種対応。</p>
+            </div>
           </div>
           <div class="service-card fade-in">
-            <div class="service-icon-circle">🏠</div>
-            <h3>ペットホテル</h3>
-            <p>ペットカメラ付きで安心。お出かけの際も愛犬が快適に過ごせる環境をご用意しています。</p>
+            <img class="service-card-img" src="/assets/img/trimming-scene.jpg" alt="施術風景">
+            <div class="service-card-body">
+              <div class="service-icon-circle">🏠</div>
+              <h3>ペットホテル</h3>
+              <p>ペットカメラ付きで安心。お出かけの際も愛犬が快適に過ごせる環境をご用意しています。</p>
+            </div>
           </div>
           <div class="service-card fade-in">
-            <div class="service-icon-circle">🚗</div>
-            <h3>出張グルーミング</h3>
-            <p>ご自宅やご近所までお伺いして、グルーミングを行います。移動が難しいわんちゃんにも対応。</p>
+            <div class="service-card-body">
+              <div class="service-icon-circle">🚗</div>
+              <h3>出張グルーミング</h3>
+              <p>ご自宅やご近所までお伺いして、グルーミングを行います。移動が難しいわんちゃんにも対応。</p>
+            </div>
           </div>
         </div>
         <div style="text-align: center; margin-top: 36px;" class="fade-in">
