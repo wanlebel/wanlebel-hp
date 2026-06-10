@@ -104,12 +104,13 @@
       overflow: hidden;
       background: var(--cream);
     }
-    .hero-bg {
+    .hero-slide {
       position: absolute; inset: 0;
-      background: url('/assets/img/hero-dog.jpg') center/cover no-repeat;
-      animation: heroZoom 18s ease-in-out infinite alternate;
+      background-size: cover; background-position: center;
+      opacity: 0;
+      animation: heroSlide 20s ease-in-out infinite;
     }
-    .hero-bg::after {
+    .hero-slide::after {
       content: '';
       position: absolute; inset: 0;
       background: linear-gradient(
@@ -119,9 +120,29 @@
         rgba(250,246,237,0.65) 100%
       );
     }
-    @keyframes heroZoom {
-      0%   { transform: scale(1); }
-      100% { transform: scale(1.08); }
+    .hero-slide:nth-child(1) {
+      background-image: url('/assets/img/hero-dog.jpg');
+      animation-delay: 0s;
+    }
+    .hero-slide:nth-child(2) {
+      background-image: url('/assets/img/exterior-front.jpg');
+      animation-delay: 5s;
+    }
+    .hero-slide:nth-child(3) {
+      background-image: url('/assets/img/trimming-corgi.jpg');
+      animation-delay: 10s;
+    }
+    .hero-slide:nth-child(4) {
+      background-image: url('/assets/img/trimming-poodle.jpg');
+      animation-delay: 15s;
+    }
+    /* 20s total = 4 slides x 5s each */
+    @keyframes heroSlide {
+      0%    { opacity: 0; transform: scale(1); }
+      2%    { opacity: 1; }
+      23%   { opacity: 1; }
+      25%   { opacity: 0; transform: scale(1.08); }
+      100%  { opacity: 0; transform: scale(1); }
     }
     .hero-content {
       position: relative; z-index: 2;
@@ -510,7 +531,10 @@
 
     <!-- ── 1. Hero ── -->
     <section class="hero">
-      <div class="hero-bg"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
       <div class="hero-content fade-in">
         <h1>第二のおうちのような、<br>やさしく包む空間</h1>
         <p>山口市の犬専門トリミングサロン「ワン・ルベル」では、トリミングとペットホテルを併設し、愛犬が安心して過ごせる環境を大切にしています。</p>
